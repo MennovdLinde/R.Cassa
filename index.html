@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schoonwerk – Preview</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%230071e3'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0071e3">
+<style>
+:root{--bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--mute:#6e6e73;--line:#e5e5ea;--blue:#0071e3;--blue-soft:#e8f2fd;--green:#30a46c;--green-soft:#e6f6ee;--amber:#d98200;--amber-soft:#fff4e0;--red:#e5484d;--red-soft:#fdeceb;--r:16px;--sh:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.05)}
+@media(prefers-color-scheme:dark){:root{--bg:#000;--card:#1c1c1e;--ink:#f5f5f7;--mute:#98989d;--line:#2c2c2e;--blue:#2997ff;--blue-soft:#0a2540;--green-soft:#0e2e1e;--amber-soft:#33250a;--red-soft:#3a1517;--sh:none}}
+*{box-sizing:border-box;margin:0}
+body{font:15px/1.45 -apple-system,BlinkMacSystemFont,"SF Pro Text","Inter",system-ui,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.app{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
+aside{padding:20px 14px;overflow-y:auto;position:sticky;top:0;height:100vh;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;background:var(--bg)}
+.brand{font-weight:700;font-size:18px;padding:4px 12px 16px;display:flex;gap:8px;align-items:center}
+.brand i{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,#4cc3ff,#0071e3);display:inline-block}
+.nav{display:flex;gap:12px;align-items:center;padding:9px 12px;border-radius:10px;color:var(--ink);text-align:left;width:100%}
+.nav:hover{background:var(--line)}.nav.on{background:var(--blue-soft);color:var(--blue);font-weight:600}
+.nav .ic{width:20px;text-align:center;font-size:16px}
+.nav .badge{margin-left:auto;background:var(--red);color:#fff;border-radius:99px;font-size:11px;padding:1px 7px;font-weight:600}
+.sp{flex:1}.who{font-size:12px;color:var(--mute);padding:8px 12px}
+main{padding:64px 36px 60px;max-width:1280px}
+h1{font-size:30px;letter-spacing:-.02em}.sub{color:var(--mute);margin:2px 0 22px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:18px}
+.grid{display:grid;gap:16px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:3fr 2fr}
+.kpi .l{color:var(--mute);font-size:13px}.kpi .v{font-size:30px;font-weight:700;letter-spacing:-.02em;margin-top:2px}.kpi .d{font-size:13px;margin-top:2px}
+.up{color:var(--green)}.down{color:var(--red)}
+h3{font-size:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+h3 a{font-size:13px;color:var(--blue);font-weight:500;cursor:pointer}
+.btn{background:var(--blue);color:#fff;padding:9px 16px;border-radius:99px;font-weight:600;font-size:14px}
+.btn.ghost{background:var(--blue-soft);color:var(--blue)}.btn.sm{padding:5px 12px;font-size:13px}
+.seg{display:inline-flex;background:var(--line);border-radius:10px;padding:3px;gap:2px}
+.seg button{padding:6px 14px;border-radius:8px;font-size:14px;color:var(--mute)}
+.seg button.on{background:var(--card);color:var(--ink);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}.row:last-child{border:0}
+.row .t{flex:1;min-width:0}.row .t b{display:block;font-weight:600}.row .t span{color:var(--mute);font-size:13px}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;color:#fff;flex:none}
+.pill{font-size:12px;padding:3px 10px;border-radius:99px;font-weight:600;white-space:nowrap}
+.p-g{background:var(--green-soft);color:var(--green)}.p-a{background:var(--amber-soft);color:var(--amber)}.p-r{background:var(--red-soft);color:var(--red)}.p-b{background:var(--blue-soft);color:var(--blue)}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;border-radius:9px;background:var(--blue)}
+table{width:100%;border-collapse:collapse}th{text-align:left;color:var(--mute);font-weight:500;font-size:13px;padding:8px 10px}td{padding:12px 10px;border-top:1px solid var(--line)}
+tr.click:hover td{background:var(--bg);cursor:pointer}
+input[type=search],input[type=text],select,textarea{font:inherit;padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);width:100%}
+.hide{display:none!important}
+/* planning */
+.pl{display:grid;grid-template-columns:150px repeat(5,1fr);gap:6px;font-size:13px}
+.pl .h{color:var(--mute);text-align:center;padding:4px;font-weight:600}.pl .h.today{color:var(--blue)}
+.pl .n{display:flex;gap:8px;align-items:center;font-weight:600;padding:4px 0}
+.cell{min-height:58px;border-radius:10px;background:var(--bg);padding:4px;display:flex;flex-direction:column;gap:4px;border:2px dashed transparent;transition:.15s}
+.cell.over{border-color:var(--blue);background:var(--blue-soft)}
+.chip{border-radius:8px;padding:5px 8px;font-size:12px;line-height:1.25;cursor:grab;color:#fff;position:relative}
+.chip small{opacity:.85;display:block}.chip .rep{position:absolute;right:6px;top:4px;opacity:.8}
+.c1{background:#0071e3}.c2{background:#30a46c}.c3{background:#8e5cd9}.c4{background:#e08a00}.c0{background:#8e8e93}
+.hint{background:var(--blue-soft);color:var(--blue);padding:10px 14px;border-radius:12px;font-size:14px;display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+/* portal */
+.portal{background:linear-gradient(180deg,#eaf3ff,var(--bg) 260px)}
+@media(prefers-color-scheme:dark){.portal{background:var(--bg)}}
+.tile{border:1px solid var(--line);border-radius:14px;padding:16px;text-align:left;background:var(--card);transition:.15s}.tile:hover{border-color:var(--blue);transform:translateY(-2px)}
+.tile .e{font-size:26px}.tile b{display:block;margin-top:6px}.tile span{color:var(--mute);font-size:13px}
+.chat{display:flex;flex-direction:column;gap:8px}.msg{max-width:78%;padding:9px 14px;border-radius:18px;font-size:14px}
+.msg.me{align-self:flex-end;background:var(--blue);color:#fff}.msg.th{align-self:flex-start;background:var(--bg)}
+.check{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.check input{width:20px;height:20px;accent-color:var(--green)}
+.phone{width:300px;border:8px solid #1d1d1f;border-radius:38px;padding:16px 14px;background:var(--bg);margin:auto}
+.big{width:100%;padding:14px;border-radius:14px;font-weight:700;font-size:16px;background:var(--green);color:#fff}.big.stop{background:var(--red)}
+.ai{background:linear-gradient(135deg,#f0e8ff,#e8f2fd);border-radius:14px;padding:14px;color:#1d1d1f;font-size:14px}
+@media(prefers-color-scheme:dark){.ai{background:#1d1b30;color:#f5f5f7}}
+.gf{grid-template-columns:minmax(300px,1fr) minmax(320px,1.15fr)}.gc{grid-template-columns:200px 1fr 300px}
+.qa{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.qa button{background:var(--card);box-shadow:var(--sh);border-radius:99px;padding:9px 16px;font-size:14px;font-weight:500;display:flex;gap:8px;align-items:center;transition:.15s}.qa button:hover{transform:translateY(-1px);color:var(--blue)}
+@keyframes up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+main>*{animation:up .4s cubic-bezier(.2,.7,.2,1) both}main>*:nth-child(2){animation-delay:.04s}main>*:nth-child(3){animation-delay:.08s}main>*:nth-child(4){animation-delay:.12s}main>*:nth-child(5){animation-delay:.16s}
+.card:hover{box-shadow:0 2px 4px rgba(0,0,0,.05),0 12px 32px rgba(0,0,0,.08)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--blue) 45%,transparent);outline-offset:1px}
+::selection{background:var(--blue-soft)}
+.msec{width:100%;text-align:left;cursor:pointer}.msec:hover{color:var(--ink)}
+.demo{display:inline-block;background:var(--amber-soft);color:var(--amber);padding:2px 9px;border-radius:99px;font-weight:600;margin-bottom:4px}
+.nav.more.hide{display:none}
+#wel{position:fixed;inset:0;z-index:30;background:radial-gradient(circle at 30% 20%,#9fd4ff 0,transparent 45%),radial-gradient(circle at 80% 80%,#c7b5ff 0,transparent 45%),var(--bg);display:flex;align-items:center;justify-content:center;transition:opacity .5s}
+#wel.gone{opacity:0;pointer-events:none;visibility:hidden}
+#wel .lg{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,#4cc3ff,#0071e3);margin:0 auto 18px;box-shadow:0 14px 40px rgba(0,113,227,.4)}
+#wel h1{font-size:44px;letter-spacing:-.03em}#wel p{color:var(--mute);margin:8px 0 22px;font-size:17px}
+#tour{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);width:min(420px,92vw);background:var(--card);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:18px;z-index:15;animation:up .3s both}
+.sec{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);padding:14px 12px 4px;font-weight:600}
+.sw{display:flex;gap:8px;align-items:center;cursor:pointer;font-size:14px}.sw input{width:18px;height:18px;accent-color:var(--blue)}
+.card{transition:box-shadow .15s}.top h1{font-weight:700}
+input[type=range]{accent-color:var(--blue)}
+#pal{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);z-index:20;display:flex;justify-content:center;padding-top:14vh}
+#pal>div{background:var(--card);width:min(520px,92vw);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.35);height:fit-content;overflow:hidden}
+#pin{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:16px 20px;font-size:17px;outline:0}
+.pi{display:flex;justify-content:space-between;width:100%;padding:11px 20px;text-align:left}.pi:hover{background:var(--blue-soft)}.pi small{color:var(--mute)}
+.sbtn{padding:7px 14px;border-radius:99px;background:var(--card);box-shadow:var(--sh);color:var(--mute);font-size:13px;margin-right:8px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1d1d1f;color:#fff;padding:11px 20px;border-radius:99px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:9}.toast.on{opacity:1}
+.mode{position:fixed;top:14px;right:18px;z-index:8;display:flex;align-items:center}
+@media(max-width:1100px){.gc{grid-template-columns:1fr}.gc>.card:first-child{display:flex;flex-wrap:wrap}}
+@media(max-width:900px){.nav.more.hide{display:flex!important}.msec{display:none}#tour{bottom:92px}.gf{grid-template-columns:1fr}#invpv{max-width:100%}.top h1{font-size:24px}.sec{display:none}.app{grid-template-columns:1fr}aside{position:fixed;bottom:0;top:auto;height:auto;flex-direction:row;overflow-x:auto;z-index:7;border-top:1px solid var(--line);border-right:0;padding:6px}.brand,.who,.sp{display:none}.nav{flex-direction:column;gap:2px;font-size:11px;width:auto;min-width:64px;padding:6px}.nav .badge{position:absolute;margin:0;transform:translate(14px,-6px)}main{padding:20px 16px 100px}.g4,.g3,.g2{grid-template-columns:1fr 1fr}.g2,.g3{grid-template-columns:1fr}.pl{grid-template-columns:90px repeat(5,minmax(110px,1fr));overflow-x:auto}.mode{display:none}}
+</style>
+</head>
+<body>
+<div class="mode"><button class="sbtn" onclick="pal(true)">🔍 Zoeken · ⌘K</button><div class="seg" id="modeSeg"><button class="on" data-m="office">Kantoor</button><button data-m="portal">Klantportaal</button><button data-m="app">Medewerker-app</button></div></div>
+<div id="root"></div>
+<div id="tour" class="hide"></div>
+<div id="wel"><div style="text-align:center;max-width:520px;padding:24px"><div class="lg"></div><h1>Schoonwerk</h1><p>Voorbeeld voor C.J. Kam</p><div style="color:var(--mute);margin:-8px 0 26px;font-size:15px">Schoonmaakbeheer zoals het hoort te voelen: rustig, snel en helemaal op maat. Alle gegevens in deze demo zijn fictief.</div><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn" style="padding:13px 26px;font-size:16px" onclick="welcome(true)">Start rondleiding</button><button class="btn ghost" style="padding:13px 26px;font-size:16px" onclick="welcome(false)">Zelf verkennen</button></div></div></div>
+<div id="pal" class="hide" onclick="if(event.target===this)pal(false)"><div><input id="pin" type="text" placeholder="Zoek een klant, medewerker of actie…" oninput="palList(this.value)"><div id="plist"></div></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2200)};
+const eur=n=>'€ '+n.toLocaleString('nl-NL');
+const COL=['#0071e3','#30a46c','#8e5cd9','#e08a00','#e5484d','#00a3a3'];
+const ini=n=>n.split(' ').map(x=>x[0]).join('').slice(0,2);
+const av=(n,i)=>`<div class="av" style="background:${COL[i%6]}">${ini(n)}</div>`;
+
+/* ---------- fictieve data ---------- */
+const staff=[{n:'Sanne de Wit',h:'32 / 36'},{n:'Mo El Amrani',h:'38 / 40'},{n:'Lotte Bakker',h:'24 / 24'},{n:'Ravi Singh',h:'20 / 32'},{n:'Eva Jansen',h:'16 / 16'}];
+const jobs={a:{t:'Kantoor Zuidas',c:'c1',time:'06:00–08:00'},b:{t:'VvE De Linde',c:'c2',time:'08:30–10:00'},c:{t:'Café Centraal',c:'c3',time:'10:30–12:00'},d:{t:'Sportschool Fit',c:'c4',time:'17:00–20:00'},e:{t:'Glasbewassing',c:'c0',time:'09:00–11:00'}};
+let plan={'0-0':['a'],'0-1':['a'],'0-2':['a'],'0-3':['a'],'0-4':['a'],'1-0':['b'],'1-2':['b','c'],'1-4':['b'],'2-1':['d'],'2-3':['d'],'3-0':['c'],'3-2':['e'],'3-4':['c'],'4-0':['d'],'4-3':['d']};
+let rep={}; ['0-0','0-1','0-2','0-3','0-4','2-1','2-3','4-0','4-3'].forEach(k=>rep[k+plan[k][0]]=1);
+const clients={actief:[['Kantoor Zuidas','Facilitair · 3 locaties',4820],['VvE De Linde','VvE · 1 locatie',1260],['Café Centraal','Horeca · 2 locaties',2140],['Sportschool Fit','Sport · 1 locatie',1890],['Makelaardij Berg','Kantoor · 1 locatie',640],['Tandarts Oost','Zorg · 1 locatie',720]],
+ prospect:[['Hotel Duin','Offerte verstuurd · € 3.400/mnd','Wacht op antwoord'],['Basisschool De Boom','Bezichtiging gepland 28 nov','Afspraak']],
+ oud:[['Bakkerij Smit','Gestopt okt 2025','Verhuisd'],['Kantoor Pieters','Gestopt mrt 2025','Prijs']]};
+let cTab='actief';
+const marg=[['Kantoor Zuidas',4820,3290,32],['Sportschool Fit',1890,1480,22],['Café Centraal',2140,1910,11],['VvE De Linde',1260,820,35],['Tandarts Oost',720,430,40]];
+
+/* ---------- views ---------- */
+const sel={klant:null,team:null,opdr:0,chk:0,loc:0,mid:'nfc',bk:'btw',inst:'feest',imp:0,sal:2};
+let moreOpen=false;
+const nav=[['Dagelijks'],['dash','🏠','Dashboard'],['plan','📅','Planning'],['inbox','💬','Berichten'],['Relaties'],['klant','👥','Klanten'],['opdr','🔁','Opdrachten'],['team','🧑‍🤝‍🧑','Medewerkers'],['verlof','🌴','Verlof'],['kaart2','🗺️','Locaties'],['Uitvoering'],['chk','📋','Checklists'],['werk','✅','Werkorders'],['uren','⏱️','Uren & marge'],['Financieel'],['fin','💶','Offertes & facturen'],['fact','🎨','Factuurontwerp'],['Meer'],['inkoop','🏦','Inkoop & bank','m'],['sal','💼','Salaris','m'],['bk','📒','Boekhouding','m'],['rap','📊','Rapporten','m'],['mid','🔑','Middelen','m'],['stock','📦','Voorraad','m'],['rollen','🔐','Rollen & rechten','m'],['inst','⚙️','Instellingen','m'],['vergelijk','⚖️','Vs. Klien IT','m']];
+const V={};
+V.dash=()=>`
+<div class="top"><div><h1>Goedemorgen, C.J. 👋</h1><div class="sub">Maandag 23 november · alles wat vandaag telt, op één scherm</div></div><button class="btn" onclick="go('plan')">Naar planning</button></div>
+<div class="qa">${[['🔁','Nieuwe opdracht',"sel.opdr=-1;go('opdr')"],['📅','Dienst plannen',"go('plan')"],['🎨','Factuur ontwerpen',"go('fact')"],['👥','Klant toevoegen',"go('klant')"],['⌘K','Zoeken','pal(true)']].map(a=>`<button onclick="${a[2]}"><span>${a[0]}</span>${a[1]}</button>`).join('')}</div>
+<div class="grid g4">
+ <div class="card kpi"><div class="l">Vandaag ingepland</div><div class="v">11 <small style="font-size:15px;color:var(--mute)">medewerkers</small></div><div class="d up">▲ 0 open diensten</div></div>
+ <div class="card kpi"><div class="l">Omzet deze maand</div><div class="v">€ 38.420</div><div class="d up">▲ 6% t.o.v. oktober</div></div>
+ <div class="card kpi"><div class="l">Gemiddelde marge</div><div class="v">27%</div><div class="d down">▼ 2 opdrachten onder 15%</div></div>
+ <div class="card kpi"><div class="l">Openstaand</div><div class="v">€ 6.180</div><div class="d down">3 facturen te laat</div></div>
+</div>
+<div class="grid g2" style="margin-top:16px">
+ <div class="card"><h3>Vandaag live <a onclick="go('plan')">Alles →</a></h3>
+  ${[['Sanne de Wit','Kantoor Zuidas','Aan het werk · sinds 06:02','p-g'],['Mo El Amrani','VvE De Linde','Aan het werk · sinds 08:28','p-g'],['Lotte Bakker','Café Centraal','Gaat om 10:30 starten','p-b'],['Ravi Singh','—','Ziek gemeld · vervanger nodig','p-r']].map((r,i)=>`<div class="row">${av(r[0],i)}<div class="t"><b>${r[0]}</b><span>${r[1]}</span></div><span class="pill ${r[3]}">${r[2]}</span></div>`).join('')}
+ </div>
+ <div class="card"><h3>Actie nodig</h3>
+  <div class="row"><div class="t"><b>Vervanger voor Ravi</b><span>Sportschool Fit · 17:00</span></div><button class="btn sm" onclick="toast('AI stelt Eva Jansen voor (woont 4 km, 8 uur ruimte)')">Suggestie</button></div>
+  <div class="row"><div class="t"><b>2 aanvragen via klantportaal</b><span>Extra schoonmaak · Glasbewassing</span></div><button class="btn sm ghost" onclick="go('inbox')">Bekijk</button></div>
+  <div class="row"><div class="t"><b>Contract Eva Jansen</b><span>Loopt af over 38 dagen</span></div><button class="btn sm ghost" onclick="go('team')">Bekijk</button></div>
+  <div class="row"><div class="t"><b>Verlofaanvraag Mo</b><span>9 jan – 25 jan</span></div><button class="btn sm" onclick="toast('Goedgekeurd')">Goedkeuren</button></div>
+ </div></div>
+<div class="card" style="margin-top:16px"><h3>Omzet en marge · laatste 6 maanden</h3><div style="display:flex;gap:14px;align-items:flex-end;height:120px">${[['Jun',31,24],['Jul',33,25],['Aug',32,23],['Sep',35,26],['Okt',36,28],['Nov',38,27]].map(m=>`<div style="flex:1;text-align:center"><div style="display:flex;gap:4px;align-items:flex-end;justify-content:center;height:96px"><div title="Omzet" style="width:44%;height:${m[1]*2.4}px;background:var(--blue);border-radius:6px 6px 2px 2px"></div><div title="Marge %" style="width:30%;height:${m[2]*2.4}px;background:var(--green);border-radius:6px 6px 2px 2px"></div></div><div style="font-size:12px;color:var(--mute);margin-top:4px">${m[0]}</div></div>`).join('')}</div><div style="display:flex;gap:14px;font-size:12px;color:var(--mute);margin-top:8px"><span><i style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--blue)"></i> Omzet (€ k)</span><span><i style="display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--green)"></i> Marge (%)</span></div></div>
+<div class="card" style="margin-top:16px"><h3>🤖 AI-inzichten</h3><div class="ai">Opdracht <b>Café Centraal</b> heeft een marge van 11%: medewerkers klokken gemiddeld <b>24 min langer</b> uit dan de geoffreerde tijd. Voorstel: tijd per bezoek aanpassen of prijs met 6% verhogen. <a style="color:var(--blue);cursor:pointer" onclick="go('uren')">Bekijk details →</a></div></div>`;
+
+V.plan=()=>{
+ const days=['Ma 23','Di 24','Wo 25','Do 26','Vr 27'];
+ return `<div class="top"><div><h1>Planning</h1><div class="sub">Week 48 · sleep een dienst naar een andere dag of medewerker</div></div>
+ <div style="display:flex;gap:8px"><button class="btn ghost" onclick="toast('AI heeft 3 verbeteringen gevonden: −42 km reistijd')">✨ Optimaliseer met AI</button><button class="btn" onclick="toast('Nieuwe dienst: kies klant en tijd')">+ Dienst</button></div></div>
+ <div class="hint"><span>💡 <b>Herhalen in 1 klik:</b> dubbelklik een dienst en kies <i>Elke week</i>. Wijzigen kan voor één keer of voor alle volgende.</span><span class="pill p-b">Nieuw</span></div>
+ <div class="card"><div class="pl"><div></div>${days.map((d,i)=>`<div class="h ${i==0?'today':''}">${d}</div>`).join('')}
+ ${staff.map((s,si)=>`<div class="n">${av(s.n,si)}<div>${s.n.split(' ')[0]}<div style="font-weight:400;color:var(--mute);font-size:11px">${s.h} u</div></div></div>`+days.map((d,di)=>`<div class="cell" data-k="${si}-${di}">${(plan[si+'-'+di]||[]).map(j=>chip(si+'-'+di,j)).join('')}</div>`).join('')).join('')}
+ </div></div>`};
+const chip=(k,j)=>`<div class="chip ${jobs[j].c}" draggable="true" data-k="${k}" data-j="${j}" ondblclick="repeat('${k}','${j}')">${rep[k+j]?'<span class="rep">↻</span>':''}${jobs[j].t}<small>${jobs[j].time}</small></div>`;
+function repeat(k,j){rep[k+j]=!rep[k+j];toast(rep[k+j]?'↻ Herhaalt elke week':'Herhaling uitgezet');render()}
+function wirePlan(){let d;$$('.chip').forEach(c=>c.ondragstart=e=>{d=c;e.dataTransfer.setData('t','x')});
+ $$('.cell').forEach(c=>{c.ondragover=e=>{e.preventDefault();c.classList.add('over')};c.ondragleave=()=>c.classList.remove('over');
+ c.ondrop=e=>{e.preventDefault();if(!d)return;const f=d.dataset.k,j=d.dataset.j,t=c.dataset.k;plan[f]=plan[f].filter((x,i)=>i!==plan[f].indexOf(j));(plan[t]=plan[t]||[]).push(j);toast('Verplaatst ✓');render()}})}
+
+V.klant=()=>{
+ if(sel.klant!=null)return V.kaart(sel.klant);
+ const tabs=[['actief','Actief',clients.actief.length],['prospect','Prospects',clients.prospect.length],['oud','Oud',clients.oud.length]];
+ const body=cTab==='actief'?clients.actief.map((c,i)=>`<tr class="click" onclick="sel.klant=${i};render()"><td><div style="display:flex;gap:10px;align-items:center">${av(c[0],i)}<div><b>${c[0]}</b><div style="color:var(--mute);font-size:13px">${c[1]}</div></div></div></td><td style="text-align:right"><b>${eur(c[2])}</b><div style="color:var(--mute);font-size:13px">per maand</div></td><td><span class="pill p-g">Actief</span></td></tr>`).join('')
+ :clients[cTab].map((c,i)=>`<tr class="click"><td><div style="display:flex;gap:10px;align-items:center">${av(c[0],i+2)}<div><b>${c[0]}</b><div style="color:var(--mute);font-size:13px">${c[1]}</div></div></div></td><td style="text-align:right"></td><td><span class="pill ${cTab==='prospect'?'p-a':'p-r'}">${c[2]}</span></td></tr>`).join('');
+ return `<div class="top"><div><h1>Klanten</h1><div class="sub">Gescheiden per fase, zodat oude relaties je niet meer in de weg zitten</div></div><button class="btn" onclick="toast('Nieuwe klant in 3 velden')">+ Klant</button></div>
+ <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap"><div class="seg">${tabs.map(t=>`<button class="${cTab==t[0]?'on':''}" onclick="cTab='${t[0]}';render()">${t[1]} · ${t[2]}</button>`).join('')}</div><input type="search" placeholder="Zoek op naam, locatie of contact…" style="flex:1;min-width:200px"></div>
+ <div class="card" style="padding:6px 10px"><table>${body}</table></div>`};
+
+V.werk=()=>`<div class="top"><div><h1>Werkorders & checklists</h1><div class="sub">Gekoppeld aan de planning. Medewerkers vinken af in de app, jij ziet het live.</div></div><button class="btn ghost" onclick="toast('Sjabloon kiezen: Kantoor, Sanitair, VvE…')">+ Checklist-sjabloon</button></div>
+<div class="grid g2"><div class="card"><h3>Kantoor Zuidas · vandaag 06:00</h3><div class="bar" style="margin-bottom:10px"><i style="width:75%"></i></div>
+${['Prullenbakken legen','Toiletten reinigen','Keuken en pantry','Vloeren stofzuigen','Vloeren dweilen','Foto na afloop'].map((x,i)=>`<label class="check"><input type="checkbox" ${i<4?'checked':''} onchange="toast('Bijgewerkt in realtime')"> ${x}${i==5?'<span class="pill p-a" style="margin-left:auto">Foto verplicht</span>':''}</label>`).join('')}</div>
+<div class="card"><h3>Meldingen van locatie</h3><div class="row"><div class="t"><b>Zeep op in toilet 2e verdieping</b><span>Gemeld door Sanne · foto bijgevoegd</span></div><span class="pill p-a">Open</span></div><div class="row"><div class="t"><b>Vlek op tapijt vergaderzaal</b><span>Gemeld door klant via portaal</span></div><span class="pill p-b">Ingepland</span></div><div class="row"><div class="t"><b>Lamp defect gang</b><span>Doorgezet naar facilitair</span></div><span class="pill p-g">Klaar</span></div></div></div>`;
+
+V.uren=()=>`<div class="top"><div><h1>Uren & marge</h1><div class="sub">Op basis van in- en uitklokken per opdracht</div></div></div>
+<div class="card"><h3>Marge per opdracht · november</h3><table><tr><th>Opdracht</th><th>Omzet</th><th>Loonkosten</th><th style="width:30%">Marge</th></tr>
+${marg.map(m=>`<tr><td><b>${m[0]}</b></td><td>${eur(m[1])}</td><td>${eur(m[2])}</td><td><div style="display:flex;gap:10px;align-items:center"><div class="bar" style="flex:1"><i style="width:${m[3]*2}%;background:${m[3]<15?'var(--red)':m[3]<25?'var(--amber)':'var(--green)'}"></i></div><b>${m[3]}%</b></div></td></tr>`).join('')}</table></div>
+<div class="grid g2" style="margin-top:16px"><div class="card"><h3>🤖 AI-analyse</h3><div class="ai"><b>Café Centraal</b>: geoffreerd 90 min, gemiddeld gewerkt 114 min over de laatste 8 bezoeken. Verlies ± € 210 per maand.<br><br><b>Voorstel:</b> prijs +6% of tijd naar 110 min. <div style="margin-top:10px;display:flex;gap:8px"><button class="btn sm" onclick="toast('Conceptofferte gemaakt')">Maak offerte-aanpassing</button><button class="btn sm ghost" onclick="toast('Planning aangepast')">Pas tijd aan</button></div></div></div>
+<div class="card"><h3>Urencontrole</h3><div style="color:var(--mute);font-size:14px;margin-bottom:8px">Keur afwijkingen tussen gepland en geklokt automatisch goed als ze binnen de marge vallen.</div><div style="display:flex;align-items:center;gap:12px"><input type="range" min="0" max="30" value="5" id="tol" oninput="tolU()" style="flex:1"><b id="tolv">5 min</b></div><div class="bar" style="margin:10px 0 6px"><i id="tolb" style="width:57%"></i></div><div id="told" style="font-size:14px"></div><button class="btn" style="margin-top:12px;width:100%" onclick="toast('Alle afwijkingen binnen de marge zijn goedgekeurd')">Keur goed binnen marge</button></div>
+<div class="card"><h3>Klokgegevens vandaag</h3>${[['Sanne de Wit','06:02 – 07:58','−2 min'],['Mo El Amrani','08:28 – 10:21','+21 min'],['Eva Jansen','07:00 – 08:00','0']].map((r,i)=>`<div class="row">${av(r[0],i)}<div class="t"><b>${r[0]}</b><span>${r[1]}</span></div><span class="pill ${r[2].startsWith('+')?'p-a':'p-g'}">${r[2]}</span></div>`).join('')}</div></div>`;
+
+V.teamlist=()=>`<div class="top"><div><h1>Medewerkers</h1><div class="sub">Documenten uploaden en automatisch herinnerd worden</div></div><button class="btn" onclick="toast('Medewerker toevoegen')">+ Medewerker</button></div>
+<div class="grid g2"><div class="card" style="padding:6px 10px"><table>${staff.map((s,i)=>`<tr class="click" onclick="sel.team=${i};render()"><td><div style="display:flex;gap:10px;align-items:center">${av(s.n,i)}<b>${s.n}</b></div></td><td>${s.h} uur</td><td><span class="pill ${i==3?'p-r':i==4?'p-a':'p-g'}">${i==3?'Ziek':i==4?'Contract loopt af':'Actief'}</span></td></tr>`).join('')}</table></div>
+<div class="card"><h3>Herinneringen</h3><div class="row"><div class="t"><b>Contract Eva Jansen</b><span>Einddatum 31 dec · accountant is op de hoogte</span></div><span class="pill p-a">38 dgn</span></div><div class="row"><div class="t"><b>VOG Mo El Amrani</b><span>Verloopt 14 feb</span></div><span class="pill p-b">82 dgn</span></div><div class="row"><div class="t"><b>Verjaardag Lotte</b><span>Morgen</span></div><span class="pill p-g">🎂</span></div>
+<button class="btn ghost" style="width:100%;margin-top:14px" onclick="toast('Sleep bestanden hierheen: contract, ID, VOG…')">⬆ Document uploaden</button></div></div>`;
+
+V.team=()=>sel.team!=null?V.medew(sel.team):V.teamlist();
+V.fin=()=>`<div class="top"><div><h1>Offertes & facturen</h1><div class="sub">Van offerte naar factuur in twee klikken</div></div><button class="btn" onclick="toast('Nieuwe offerte')">+ Offerte</button></div>
+<div class="grid g3"><div class="card kpi"><div class="l">Offertes open</div><div class="v">3</div><div class="d">€ 9.200 potentieel</div></div><div class="card kpi"><div class="l">Te factureren</div><div class="v">€ 38.420</div><div class="d"><a style="color:var(--blue);cursor:pointer" onclick="toast('Alle facturen aangemaakt als concept')">Maak alle facturen →</a></div></div><div class="card kpi"><div class="l">Te laat</div><div class="v down">€ 2.140</div><div class="d"><a style="color:var(--blue);cursor:pointer" onclick="toast('Herinnering verstuurd')">Stuur herinneringen →</a></div></div></div>
+<div class="card" style="margin-top:16px;padding:6px 10px"><table><tr><th>Nr.</th><th>Klant</th><th>Bedrag</th><th>Status</th></tr>
+${[['2026-0412','Kantoor Zuidas',4820,'Betaald','p-g'],['2026-0413','VvE De Linde',1260,'Verstuurd','p-b'],['2026-0414','Café Centraal',2140,'Te laat','p-r'],['2026-0415','Sportschool Fit',1890,'Concept','p-a']].map(r=>`<tr class="click"><td>${r[0]}</td><td>${r[1]}</td><td>${eur(r[2])}</td><td><span class="pill ${r[4]}">${r[3]}</span></td></tr>`).join('')}</table></div>`;
+
+V.stock=()=>`<div class="top"><div><h1>Voorraad</h1><div class="sub">Producten en middelen per locatie</div></div><button class="btn ghost" onclick="toast('Bestelling klaargezet bij leverancier')">Bestel bijna-op</button></div>
+<div class="card">${[['Allesreiniger 5L',12,20],['Toiletpapier (doos)',3,15],['Microvezeldoekjes',48,60],['Vuilniszakken 120L',6,25]].map(s=>`<div class="row"><div class="t"><b>${s[0]}</b><div class="bar" style="margin-top:6px;max-width:320px"><i style="width:${s[1]/s[2]*100}%;background:${s[1]/s[2]<.3?'var(--red)':'var(--blue)'}"></i></div></div><span class="pill ${s[1]/s[2]<.3?'p-r':'p-g'}">${s[1]} / ${s[2]}</span></div>`).join('')}</div>`;
+
+let thread=[['th','Klant: Kan er donderdag extra schoongemaakt worden? We hebben een event.'],['me','Ja, dat plannen we in. Voorstel: 2 medewerkers, 2 uur.']];
+V.inbox=()=>`<div class="top"><div><h1>Berichten</h1><div class="sub">Alle klantcommunicatie op één plek, altijd bij de juiste persoon</div></div></div>
+<div class="grid g2"><div class="card"><h3>Kantoor Zuidas · extra schoonmaak</h3><div class="chat">${thread.map(m=>`<div class="msg ${m[0]}">${m[1]}</div>`).join('')}</div><div style="display:flex;gap:8px;margin-top:14px"><input type="text" id="mi" placeholder="Antwoord…"><button class="btn" onclick="const v=$('#mi').value;if(v){thread.push(['me',v]);render()}">Stuur</button></div></div>
+<div class="card"><h3>Nieuwe aanvragen</h3><div class="row"><div class="t"><b>Extra schoonmaak</b><span>Kantoor Zuidas · do 26 nov</span></div><span class="pill p-a">Aan Sanne</span></div><div class="row"><div class="t"><b>Glasbewassing</b><span>VvE De Linde · week 50</span></div><span class="pill p-b">Offerte maken</span></div><div class="row"><div class="t"><b>Klacht: vlek tapijt</b><span>Kantoor Zuidas</span></div><span class="pill p-r">Urgent</span></div></div></div>`;
+
+/* klantportaal */
+V.portal=()=>`<div style="max-width:860px;margin:0 auto;padding:32px 20px 60px"><div style="display:flex;justify-content:space-between;align-items:center"><div class="brand" style="padding:0"><i></i>Schoonwerk</div><div class="who">Kantoor Zuidas · <b>Hoi Anouk</b></div></div>
+<h1 style="margin-top:24px">Wat kunnen we voor je doen?</h1><div class="sub">Vraag iets aan. Je ziet altijd wie er mee bezig is.</div>
+<div class="grid g3">${[['🧽','Extra schoonmaak','Eenmalig of tijdelijk'],['🪟','Glasbewassing','Binnen of buiten'],['🛠️','Extra klus','Vlek, event, verhuizing'],['🧴','Producten bestellen','Zeep, papier, afvalzakken'],['⚠️','Melding of klacht','Met foto'],['📅','Planning wijzigen','Bezoek verplaatsen']].map(t=>`<button class="tile" onclick="toast('Aanvraag verstuurd. Je ziet de status hieronder.')"><div class="e">${t[0]}</div><b>${t[1]}</b><span>${t[2]}</span></button>`).join('')}</div>
+<div class="grid g2" style="margin-top:20px"><div class="card"><h3>Jouw aanvragen</h3><div class="row"><div class="t"><b>Extra schoonmaak do 26 nov</b><span>Sanne en Mo komen langs</span></div><span class="pill p-g">Bevestigd</span></div><div class="row"><div class="t"><b>Vlek tapijt vergaderzaal</b><span>Gepland vrijdag</span></div><span class="pill p-b">Ingepland</span></div></div>
+<div class="card"><h3>Eerstvolgende bezoeken</h3><div class="row"><div class="t"><b>Morgen 06:00</b><span>Reguliere schoonmaak</span></div></div><div class="row"><div class="t"><b>Woensdag 06:00</b><span>Reguliere schoonmaak</span></div></div><div class="row"><div class="t"><b>Facturen</b><span>Alles betaald ✓</span></div></div></div></div></div>`;
+
+/* medewerker-app */
+let clocked=false;
+V.app=()=>`<div style="padding:30px 10px"><div class="phone"><div style="font-size:12px;color:var(--mute)">Maandag 23 nov</div><h2 style="margin:2px 0 14px;font-size:22px">Hoi Sanne</h2>
+<div class="card" style="padding:14px;margin-bottom:12px"><div style="color:var(--mute);font-size:12px">${clocked?'Je werkt nu bij':'Eerstvolgende'}</div><b style="font-size:17px">Kantoor Zuidas</b><div style="color:var(--mute);font-size:13px;margin-bottom:12px">06:00 – 08:00 · Zuidasdok 12</div>
+<button class="big ${clocked?'stop':''}" onclick="clocked=!clocked;toast(clocked?'Ingeklokt 06:02':'Uitgeklokt · 1u 58m');render()">${clocked?'Uitklokken':'Inklokken'}</button></div>
+${clocked?`<div class="card" style="padding:12px">${['Prullenbakken','Toiletten','Keuken','Vloeren'].map(x=>`<label class="check" style="padding:8px 0"><input type="checkbox"> ${x}</label>`).join('')}<button class="btn ghost" style="width:100%;margin-top:10px" onclick="toast('Foto toegevoegd')">📷 Foto toevoegen</button></div>`:`<div class="card" style="padding:12px"><b style="font-size:14px">Daarna</b><div class="row"><div class="t"><b>VvE De Linde</b><span>08:30</span></div></div></div>`}
+<div style="font-size:11px;color:var(--mute);text-align:center;margin-top:12px">Groot, duidelijk, één hoofdactie</div></div></div>`;
+
+/* ---------- klantenkaart, medewerkerskaart, opdrachtscherm ---------- */
+const DAG=['Ma','Di','Wo','Do','Vr','Za','Zo'];
+const ops=[
+ {k:0,naam:'Reguliere schoonmaak',dagen:[0,1,2,3,4],start:'06:00',eind:'08:00',freq:1,staff:[0,1],prijs:3480,fact:'Einde maand',chk:'Kantoor standaard'},
+ {k:0,naam:'Glasbewassing',dagen:[3],start:'09:00',eind:'11:00',freq:1,staff:[1,3],prijs:640,fact:'Per uitvoering',chk:'Glas buiten'},
+ {k:0,naam:'Sanitair intensief',dagen:[5],start:'07:00',eind:'09:00',freq:1,staff:[2],prijs:340,fact:'Einde maand',chk:'Sanitair'},
+ {k:1,naam:'Trappenhuis en entree',dagen:[0,2,4],start:'08:30',eind:'10:00',freq:1,staff:[1],prijs:700,fact:'Einde maand',chk:'VvE standaard'},
+ {k:2,naam:'Horeca dagelijks',dagen:[0,1,2,3,4],start:'10:30',eind:'12:15',freq:1,staff:[2,3],prijs:2250,fact:'Einde maand',chk:'Horeca'},
+ {k:3,naam:'Avondschoonmaak',dagen:[1,3],start:'17:00',eind:'20:00',freq:1,staff:[3,4],prijs:1890,fact:'Einde maand',chk:'Sport'},
+ {k:4,naam:'Kantoor wekelijks',dagen:[2],start:'18:00',eind:'20:00',freq:1,staff:[4],prijs:320,fact:'Kwartaal',chk:'Kantoor standaard'},
+ {k:5,naam:'Praktijk dagelijks',dagen:[0,1,2,3,4],start:'18:30',eind:'19:30',freq:1,staff:[0],prijs:720,fact:'Einde maand',chk:'Zorg hygiëne'}];
+const LOON=26; // € per uur incl. werkgeverslasten (voorbeeld)
+const calc=o=>{const [a,b]=o.start.split(':'),[c,d]=o.eind.split(':');const dur=Math.max(0,(+c*60+ +d)-(+a*60+ +b))/60;const per=o.dagen.length*dur*o.staff.length/o.freq;const u=per*4.33;const kost=u*LOON;const m=o.prijs>0?Math.round((o.prijs-kost)/o.prijs*100):0;return{dur,per,u,kost,m}};
+const mp=m=>m<15?'p-r':m<25?'p-a':'p-g';
+const back=(t,f)=>`<button class="btn sm ghost" style="margin-bottom:14px" onclick="${f}">← ${t}</button>`;
+const sect=(t,body,act)=>`<div class="card"><h3>${t}${act||''}</h3>${body}</div>`;
+
+V.kaart=i=>{const c=clients.actief[i],my=ops.filter(o=>o.k===i);const oms=my.reduce((a,o)=>a+o.prijs,0)||c[2];const mm=my.length?Math.round(my.reduce((a,o)=>a+calc(o).m,0)/my.length):0;
+ return back('Alle klanten',"sel.klant=null;render()")+`
+ <div class="top"><div style="display:flex;gap:14px;align-items:center">${av(c[0],i).replace('width:34px','')}<div><h1>${c[0]}</h1><div class="sub" style="margin:0">${c[1]} · klant sinds mrt 2023</div></div></div>
+ <div style="display:flex;gap:8px"><button class="btn ghost" onclick="toast('Bericht naar klant gestart')">💬 Bericht</button><button class="btn" onclick="sel.opdr=-1;go('opdr')">+ Opdracht</button></div></div>
+ <div class="grid g4" style="margin:18px 0 16px"><div class="card kpi"><div class="l">Omzet per maand</div><div class="v">${eur(oms)}</div></div><div class="card kpi"><div class="l">Gemiddelde marge</div><div class="v">${mm}%</div><div class="d ${mm<15?'down':'up'}">${mm<15?'Onder doel':'Op doel'}</div></div><div class="card kpi"><div class="l">Openstaand</div><div class="v">${i==2?'€ 2.140':'€ 0'}</div><div class="d ${i==2?'down':'up'}">${i==2?'1 factuur te laat':'Alles betaald'}</div></div><div class="card kpi"><div class="l">Tevredenheid</div><div class="v">${i==2?'3,8':'4,7'}<small style="font-size:15px;color:var(--mute)"> / 5</small></div></div></div>
+ <div class="grid g2">
+ <div style="display:grid;gap:16px">
+  ${sect('Opdrachten',my.length?my.map(o=>{const k=calc(o);return `<div class="row" style="cursor:pointer" onclick="sel.opdr=${ops.indexOf(o)};go('opdr')"><div class="t"><b>${o.naam}</b><span>${o.dagen.map(d=>DAG[d]).join(' ')} · ${o.start}–${o.eind}${o.freq>1?' · om de '+o.freq+' weken':' · elke week'}</span></div><b>${eur(o.prijs)}</b><span class="pill ${mp(k.m)}">${k.m}%</span></div>`}).join(''):'<div style="color:var(--mute)">Nog geen opdrachten.</div>')}
+  ${sect('Locaties',`<div class="row"><div class="t"><b>Hoofdlocatie</b><span>Zuidasdok 12, Amsterdam · NFC-tag bij ingang</span></div><span class="pill p-g">Sleutel bij Sanne</span></div><div class="row"><div class="t"><b>Parkeergarage</b><span>Niveau −1 · alleen 1× per maand</span></div></div>`,'<a onclick="toast(\'Locatie toevoegen\')">+ Locatie</a>')}
+  ${sect('Facturen',`<div class="row"><div class="t"><b>2026-0412</b><span>Oktober</span></div><b>${eur(oms)}</b><span class="pill ${i==2?'p-r':'p-g'}">${i==2?'Te laat':'Betaald'}</span></div><div class="row"><div class="t"><b>2026-0371</b><span>September</span></div><b>${eur(oms)}</b><span class="pill p-g">Betaald</span></div>`)}
+ </div>
+ <div style="display:grid;gap:16px;align-content:start">
+  ${sect('Contact',`<div class="row">${av('Anouk de Vries',3)}<div class="t"><b>Anouk de Vries</b><span>Facilitair manager · 06 12 34 56 78</span></div></div><div class="row">${av('Boekhouding',4)}<div class="t"><b>Facturen naar</b><span>facturen@voorbeeld.nl</span></div></div><button class="btn ghost sm" onclick="mode='portal';render();$$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m==='portal'))">Bekijk als klant (portaal)</button>`)}
+  ${sect('Berichten',`<div class="chat"><div class="msg th">Kan er donderdag extra schoongemaakt worden?</div><div class="msg me">Staat ingepland ✓</div></div>`)}
+  ${sect('Notities',`<div style="color:var(--mute);font-size:14px">Sleutelkastje links van de deur, code via Anouk. Niet stofzuigen voor 07:00 (buren).</div>`)}
+ </div></div>`};
+
+const tdet=[
+ {fn:'Sanne de Wit',rol:'Schoonmaker',contract:'Onbepaalde tijd',eind:null,sinds:'jan 2024',docs:[['Arbeidscontract',null],['ID-bewijs','2029'],['VOG','14 feb 2027']],verlof:'18 dagen over',dag:[1,1,1,1,1,0,0]},
+ {fn:'Mo El Amrani',rol:'Teamleider',contract:'Onbepaalde tijd',eind:null,sinds:'mei 2022',docs:[['Arbeidscontract',null],['ID-bewijs','2028'],['VOG','14 feb 2027'],['Rijbewijs','2031']],verlof:'9 jan – 25 jan aangevraagd',dag:[1,1,1,1,1,1,0]},
+ {fn:'Lotte Bakker',rol:'Schoonmaker',contract:'Bepaalde tijd',eind:'30 apr 2027',sinds:'sep 2025',docs:[['Arbeidscontract','30 apr 2027'],['ID-bewijs','2030'],['VOG','2 jun 2027']],verlof:'22 dagen over',dag:[0,1,1,1,0,0,0]},
+ {fn:'Ravi Singh',rol:'Glazenwasser',contract:'Bepaalde tijd',eind:'31 mrt 2027',sinds:'apr 2026',docs:[['Arbeidscontract','31 mrt 2027'],['ID-bewijs','2027'],['VCA','8 dec 2026']],verlof:'Ziek sinds 18 nov',dag:[0,0,0,0,0,0,0]},
+ {fn:'Eva Jansen',rol:'Schoonmaker',contract:'Bepaalde tijd',eind:'31 dec 2026',sinds:'jan 2026',docs:[['Arbeidscontract','31 dec 2026 · 38 dagen'],['ID-bewijs','2032'],['VOG','5 mei 2027']],verlof:'25 dagen over',dag:[1,0,1,0,1,0,0]}];
+V.medew=i=>{const s=staff[i],t=tdet[i];const warn=d=>/38 dagen|8 dec/.test(d||'');
+ return back('Alle medewerkers',"sel.team=null;render()")+`
+ <div class="top"><div style="display:flex;gap:14px;align-items:center">${av(s.n,i)}<div><h1>${s.n}</h1><div class="sub" style="margin:0">${t.rol} · sinds ${t.sinds}</div></div></div><div style="display:flex;gap:8px"><button class="btn ghost" onclick="toast('Bericht gestuurd via de app')">💬 Bericht</button><button class="btn" onclick="toast('Document toevoegen')">⬆ Document</button></div></div>
+ ${t.eind&&warn(t.docs[0][1])?`<div class="hint" style="margin-top:16px"><span>⏰ Contract loopt af op <b>${t.eind}</b>. De accountant is gemaild.</span><button class="btn sm" onclick="toast('Verlenging klaargezet voor accountant')">Verlenging regelen</button></div>`:''}
+ <div class="grid g4" style="margin:16px 0"><div class="card kpi"><div class="l">Uren deze week</div><div class="v">${s.h.split(' / ')[0]}</div><div class="d">van ${s.h.split(' / ')[1]} u contract</div></div><div class="card kpi"><div class="l">Contract</div><div class="v" style="font-size:20px;margin-top:8px">${t.contract}</div><div class="d">${t.eind?'t/m '+t.eind:'Geen einddatum'}</div></div><div class="card kpi"><div class="l">Verlof</div><div class="v" style="font-size:20px;margin-top:8px">${t.verlof.split(' ')[0]} ${t.verlof.split(' ')[1]||''}</div><div class="d">${t.verlof}</div></div><div class="card kpi"><div class="l">Inzet marge</div><div class="v">28%</div><div class="d up">Gemiddeld op zijn/haar opdrachten</div></div></div>
+ <div class="grid g2"><div style="display:grid;gap:16px">
+  ${sect('Documenten en vervaldata',t.docs.map(d=>`<div class="row"><div class="t"><b>${d[0]}</b><span>${d[1]?'Geldig tot '+d[1]:'Opgeslagen'}</span></div><span class="pill ${warn(d[1])?'p-a':'p-g'}">${warn(d[1])?'Herinnering actief':'In orde'}</span></div>`).join(''),'<a onclick="toast(\'Sleep bestanden hierheen\')">+ Upload</a>')}
+  ${sect('Planning deze week',`<div style="display:flex;gap:8px">${DAG.slice(0,5).map((d,x)=>`<div style="flex:1;text-align:center"><div style="color:var(--mute);font-size:12px">${d}</div><div class="cell" style="min-height:44px;align-items:center;justify-content:center;font-size:12px">${(plan[i+'-'+x]||[]).map(j=>`<div class="chip ${jobs[j].c}" style="width:100%">${jobs[j].t.split(' ')[0]}</div>`).join('')||'<span style="color:var(--mute)">–</span>'}</div></div>`).join('')}</div>`)}
+ </div><div style="display:grid;gap:16px;align-content:start">
+  ${sect('Beschikbaarheid',`<div style="display:flex;gap:6px">${DAG.map((d,x)=>`<div style="flex:1;text-align:center;padding:10px 0;border-radius:10px;font-size:13px;background:${t.dag[x]?'var(--green-soft)':'var(--bg)'};color:${t.dag[x]?'var(--green)':'var(--mute)'};font-weight:600">${d}</div>`).join('')}</div>`)}
+  ${sect('Sleutels en middelen',`<div class="row"><div class="t"><b>Sleutel Kantoor Zuidas</b><span>Uitgegeven 3 jan</span></div></div>`)}
+  ${sect('Notities',`<div style="color:var(--mute);font-size:14px">Spreekt Nederlands en Engels. Liever vroege diensten.</div>`)}
+ </div></div>`};
+
+let oN=0;
+V.opdr=()=>{
+ if(sel.opdr===-1){ops.push({k:0,naam:'Nieuwe opdracht',dagen:[0],start:'09:00',eind:'11:00',freq:1,staff:[],prijs:0,fact:'Einde maand',chk:'Kantoor standaard'});sel.opdr=ops.length-1}
+ const o=ops[sel.opdr];
+ const list=`<div class="card" style="padding:6px 10px"><table><tr><th>Opdracht</th><th>Klant</th><th>Wanneer</th><th style="text-align:right">Prijs/mnd</th><th>Marge</th></tr>${ops.map((x,n)=>{const m=calc(x).m;return `<tr class="click" onclick="sel.opdr=${n};render()" ${n===sel.opdr?'style="background:var(--blue-soft)"':''}><td><b>${x.naam}</b></td><td>${clients.actief[x.k][0]}</td><td>${x.dagen.map(d=>DAG[d]).join(' ')} ${x.start}</td><td style="text-align:right">${eur(x.prijs)}</td><td><span class="pill ${mp(m)}">${m}%</span></td></tr>`}).join('')}</table></div>`;
+ return `<div class="top"><div><h1>Opdrachten</h1><div class="sub">Eén scherm voor planning, prijs en facturatie. De rest volgt vanzelf.</div></div><button class="btn" onclick="sel.opdr=-1;render()">+ Opdracht</button></div>
+ <div class="grid g2" style="align-items:start"><div class="card">
+  <h3>${o.naam}</h3>
+  <label style="font-size:13px;color:var(--mute)">Naam</label><input type="text" value="${o.naam}" oninput="ops[sel.opdr].naam=this.value;upd()" style="margin:4px 0 12px">
+  <label style="font-size:13px;color:var(--mute)">Klant</label><select onchange="ops[sel.opdr].k=+this.value;upd()" style="margin:4px 0 12px">${clients.actief.map((c,n)=>`<option value="${n}" ${n===o.k?'selected':''}>${c[0]}</option>`).join('')}</select>
+  <label style="font-size:13px;color:var(--mute)">Dagen</label><div style="display:flex;gap:6px;margin:4px 0 12px">${DAG.map((d,x)=>`<button class="btn sm ${o.dagen.includes(x)?'':'ghost'}" onclick="tg('dagen',${x})" style="flex:1;border-radius:10px">${d}</button>`).join('')}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px"><div><label style="font-size:13px;color:var(--mute)">Van</label><input type="text" value="${o.start}" oninput="ops[sel.opdr].start=this.value;upd()"></div><div><label style="font-size:13px;color:var(--mute)">Tot</label><input type="text" value="${o.eind}" oninput="ops[sel.opdr].eind=this.value;upd()"></div><div><label style="font-size:13px;color:var(--mute)">Herhaling</label><select onchange="ops[sel.opdr].freq=+this.value;upd()">${[[1,'Elke week'],[2,'Om de week'],[4,'Elke 4 weken']].map(f=>`<option value="${f[0]}" ${f[0]===o.freq?'selected':''}>${f[1]}</option>`).join('')}</select></div></div>
+  <label style="font-size:13px;color:var(--mute)">Wie voert uit</label><div style="display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 12px">${staff.map((s,x)=>`<button class="btn sm ${o.staff.includes(x)?'':'ghost'}" onclick="tg('staff',${x})">${s.n.split(' ')[0]}</button>`).join('')}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px"><div><label style="font-size:13px;color:var(--mute)">Prijs per maand (€)</label><input type="text" value="${o.prijs}" oninput="ops[sel.opdr].prijs=+this.value||0;upd()"></div><div><label style="font-size:13px;color:var(--mute)">Factureren</label><select onchange="ops[sel.opdr].fact=this.value">${['Einde maand','Per uitvoering','Kwartaal'].map(f=>`<option ${f===o.fact?'selected':''}>${f}</option>`).join('')}</select></div></div>
+  <label style="font-size:13px;color:var(--mute)">Checklist</label><select onchange="ops[sel.opdr].chk=this.value" style="margin:4px 0 16px">${tpl.map(x=>x.n).map(f=>`<option ${f===o.chk?'selected':''}>${f}</option>`).join('')}</select>
+  <button class="btn" style="width:100%" onclick="toast('Opgeslagen. Rooster, checklist en facturatie zijn bijgewerkt.')">Opslaan</button>
+ </div>
+ <div style="display:grid;gap:16px"><div class="card" id="sum"></div>${list}<div class="card"><h3>Prijzen indexeren</h3><div style="display:flex;gap:8px;align-items:center"><input type="text" id="idx" value="3,5" style="width:80px"><span>% op alle opdrachten per</span><select style="width:130px"><option>1 jan 2027</option><option>1 apr 2027</option></select><button class="btn sm" onclick="const v=parseFloat($('#idx').value.replace(',','.'))||0;ops.forEach(o=>o.prijs=Math.round(o.prijs*(1+v/100)));toast('Prijzen +'+v+'% doorgevoerd (voorbeeld)');render()">Toepassen</button></div></div></div></div>`};
+function tolU(){const t=+$('#tol').value,n=Math.round(1000*(1-Math.exp(-t/6)));$('#tolv').textContent=t+' min';$('#tolb').style.width=(n/1000*100)+'%';$('#told').innerHTML=`<b>${n}</b> van 1000 afwijkingen automatisch goedgekeurd, <b>${1000-n}</b> blijven voor jou`}
+function tg(f,x){const a=ops[sel.opdr][f];const n=a.indexOf(x);n>-1?a.splice(n,1):a.push(x);render()}
+function upd(){const o=ops[sel.opdr],k=calc(o),el=$('#sum');if(!el)return;
+ el.innerHTML=`<h3>Wat dit oplevert</h3><div class="grid g3" style="gap:10px"><div><div style="color:var(--mute);font-size:13px">Uren / maand</div><div style="font-size:22px;font-weight:700">${k.u.toFixed(0)}</div></div><div><div style="color:var(--mute);font-size:13px">Loonkosten</div><div style="font-size:22px;font-weight:700">${eur(Math.round(k.kost))}</div></div><div><div style="color:var(--mute);font-size:13px">Marge</div><div style="font-size:22px;font-weight:700" class="${k.m<15?'down':'up'}">${k.m}%</div></div></div>
+ <div class="ai" style="margin-top:12px">${o.staff.length===0?'Kies minstens één medewerker.':k.m<15?`🤖 Marge is laag. Bij ${k.u.toFixed(0)} uur per maand is een prijs van <b>${eur(Math.ceil(k.kost/0.75/10)*10)}</b> nodig voor 25% marge.`:`🤖 Gezonde opdracht. Reistijd tussen de locaties is verwerkt in het rooster.`}</div>
+ <div style="margin-top:12px;font-size:13px;color:var(--mute)"><b style="color:var(--ink)">Gebeurt automatisch:</b><br>✓ Diensten in het rooster (${o.dagen.length}× per ${o.freq>1?o.freq+' weken':'week'})<br>✓ Checklist "${o.chk}" in de app van de medewerker<br>✓ Factuur: ${o.fact.toLowerCase()}</div>`}
+
+/* ---------- checklist-sjablonen ---------- */
+const TYPES=[['vink','✓ Afvinken'],['jn','Ja / Nee'],['foto','📷 Foto verplicht'],['tekst','Opmerking'],['getal','Getal (bijv. temperatuur)']];
+const mk=a=>a.map(x=>({t:x[0],y:x[1]}));
+const tpl=[
+ {n:'Kantoor standaard',i:mk([['Prullenbakken legen','vink'],['Toiletten reinigen','vink'],['Keuken en pantry','vink'],['Vloeren stofzuigen','vink'],['Vloeren dweilen','vink'],['Foto na afloop','foto']])},
+ {n:'Sanitair',i:mk([['Toiletten en urinoirs','vink'],['Wastafels en spiegels','vink'],['Zeep en papier aangevuld?','jn'],['Foto na afloop','foto']])},
+ {n:'VvE standaard',i:mk([['Entree en trappenhuis','vink'],['Lift schoon','vink'],['Brievenbussen','vink'],['Opmerking voor beheerder','tekst']])},
+ {n:'Horeca',i:mk([['Vloeren keuken','vink'],['Toiletten gasten','vink'],['Vetafscheider gecontroleerd?','jn'],['Temperatuur koeling (°C)','getal'],['Foto keuken','foto']])},
+ {n:'Sport',i:mk([['Kleedkamers','vink'],['Douches','vink'],['Sportvloer geveegd','vink'],['Schade gezien?','jn'],['Foto bij schade','foto']])},
+ {n:'Zorg hygiëne',i:mk([['Contactpunten gedesinfecteerd','vink'],['Behandelkamer','vink'],['Afvalbak medisch geleegd','vink']])},
+ {n:'Glas buiten',i:mk([['Ramen aan de straatkant','vink'],['Kozijnen afgenomen','vink'],['Foto voor en na','foto']])}];
+const used=n=>ops.filter(o=>o.chk===n).length;
+V.chk=()=>{const t=tpl[sel.chk];
+ return `<div class="top"><div><h1>Checklists</h1><div class="sub">Maak één keer een sjabloon en koppel het aan een opdracht. De medewerker ziet het in de app.</div></div><button class="btn" onclick="tpl.push({n:'Nieuw sjabloon',i:mk([['Eerste taak','vink']])});sel.chk=tpl.length-1;render()">+ Sjabloon</button></div>
+ <div class="grid gc" style="align-items:start">
+ <div class="card" style="padding:8px">${tpl.map((x,n)=>`<button class="nav ${n===sel.chk?'on':''}" style="flex-direction:column;align-items:flex-start;gap:0" onclick="sel.chk=${n};render()"><span>${x.n}</span><span style="font-size:12px;font-weight:400;color:var(--mute)">${x.i.length} taken · ${used(x.n)} opdrachten</span></button>`).join('')}</div>
+ <div class="card"><h3>Sjabloon</h3>
+  <input type="text" value="${t.n}" style="font-weight:600;margin-bottom:14px" onchange="ops.forEach(o=>{if(o.chk===tpl[sel.chk].n)o.chk=this.value});tpl[sel.chk].n=this.value;render()">
+  ${t.i.map((x,n)=>`<div class="row" style="gap:8px"><div style="display:flex;flex-direction:column"><button onclick="mv(${n},-1)" style="line-height:1;color:var(--mute)">▲</button><button onclick="mv(${n},1)" style="line-height:1;color:var(--mute)">▼</button></div><input type="text" value="${x.t}" style="flex:1" oninput="tpl[sel.chk].i[${n}].t=this.value;pv()"><select style="width:190px" onchange="tpl[sel.chk].i[${n}].y=this.value;pv()">${TYPES.map(y=>`<option value="${y[0]}" ${y[0]===x.y?'selected':''}>${y[1]}</option>`).join('')}</select><button onclick="tpl[sel.chk].i.splice(${n},1);render()" style="color:var(--red);font-size:18px">×</button></div>`).join('')}
+  <div style="display:flex;gap:8px;margin-top:14px"><button class="btn ghost" onclick="tpl[sel.chk].i.push({t:'Nieuwe taak',y:'vink'});render()">+ Taak</button><button class="btn" style="margin-left:auto" onclick="toast('Opgeslagen. Gekoppelde opdrachten gebruiken de nieuwe versie.')">Opslaan</button></div>
+  <div style="margin-top:14px;font-size:13px;color:var(--mute)">${used(t.n)?'Gebruikt bij: '+ops.filter(o=>o.chk===t.n).map(o=>clients.actief[o.k][0]+' ('+o.naam+')').join(', '):'Nog niet gekoppeld aan een opdracht. Kies dit sjabloon bij Opdrachten.'}</div></div>
+ <div><div style="text-align:center;font-size:12px;color:var(--mute);margin-bottom:6px">Zo ziet de medewerker het</div><div class="phone" id="pv"></div></div></div>`};
+function mv(n,d){const a=tpl[sel.chk].i,m=n+d;if(m<0||m>=a.length)return;[a[n],a[m]]=[a[m],a[n]];render()}
+function pv(){const el=$('#pv');if(!el)return;const t=tpl[sel.chk];
+ const ctl=x=>x.y==='vink'?'<input type="checkbox">':x.y==='jn'?'<span style="margin-left:auto;display:flex;gap:4px"><span class="pill p-g">Ja</span><span class="pill p-r">Nee</span></span>':x.y==='foto'?'<span class="pill p-a" style="margin-left:auto">📷 Foto</span>':x.y==='getal'?'<input type="text" style="width:60px;margin-left:auto;padding:4px 8px">':'<span style="margin-left:auto;color:var(--mute);font-size:12px">✎</span>';
+ el.innerHTML=`<div style="font-size:12px;color:var(--mute)">Checklist</div><b style="font-size:17px">${t.n}</b><div class="bar" style="margin:10px 0"><i style="width:0%"></i></div><div class="card" style="padding:4px 12px">${t.i.map(x=>`<div class="check" style="padding:9px 0;font-size:14px"><span>${x.t}</span>${ctl(x)}</div>`).join('')}</div><button class="big" style="margin-top:12px;font-size:15px">Klaar en versturen</button>`}
+
+/* ================= NIEUW: factuurontwerp ================= */
+const KL=['#0071e3','#30a46c','#8e5cd9','#e08a00','#1d1d1f','#00a3a3'];
+const PRESET={
+ 'Standaard':{split:'locatie',uren:false,fotos:false,ref:true,periode:true,qr:true,above:'Schoonmaakwerkzaamheden {periode} volgens afspraak.',below:'Wij verzoeken u het bedrag binnen {termijn} dagen te voldoen onder vermelding van {factuurnummer}.'},
+ 'VvE-factuur':{split:'samen',uren:false,fotos:false,ref:true,periode:true,qr:true,above:'Beste {contactpersoon}, hierbij de factuur voor het onderhoud van {klant} over {periode}.',below:'Betaling graag via de VvE-rekening onder vermelding van {factuurnummer}. Vragen? Reageer via het klantportaal.'},
+ 'Horeca':{split:'dag',uren:true,fotos:true,ref:false,periode:true,qr:true,above:'Specificatie van uitgevoerde schoonmaakbeurten in {periode}.',below:'Bij vragen over een specifieke dag: zie de foto-rapportage in bijlage.'},
+ 'Creditnota':{split:'samen',uren:false,fotos:false,ref:true,periode:true,qr:false,above:'Creditnota naar aanleiding van uw melding over {periode}.',below:'Het bedrag wordt verrekend met de eerstvolgende factuur.'}};
+const inv={tpl:'Standaard',color:'#0071e3',font:'modern',logo:true,btw:true,foot:'Schoonwerk B.V. · KvK 12345678 · NL00 BANK 0123 4567 89 · info@voorbeeld.nl',klant:0,velden:[['Kostenplaats','KP-2210'],['PO-nummer','PO-88431']],...PRESET['Standaard']};
+const VARS=['klant','periode','factuurnummer','termijn','contactpersoon','locatie','po_nummer'];
+const fillv=t=>t.replace(/\{(\w+)\}/g,(m,k)=>({klant:clients.actief[inv.klant][0],periode:'november 2026',factuurnummer:'2026-0416',termijn:'14',contactpersoon:'Anouk',locatie:'Hoofdlocatie',po_nummer:(inv.velden.find(v=>v[0]==='PO-nummer')||[0,'–'])[1]})[k]||m);
+const LOCS=['Hoofdlocatie','Parkeergarage','Hoofdlocatie'];
+function invLines(){const k=inv.klant;let my=ops.filter(o=>o.k===k);if(!my.length)my=[{naam:'Reguliere schoonmaak',prijs:clients.actief[k][2]}];return my.map((o,i)=>({n:o.naam,loc:LOCS[i%3],bez:(o.dagen?o.dagen.length*4:8),u:o.dagen?+calc(o).u.toFixed(0):20,p:o.prijs}))}
+function invHTML(){
+ const L=invLines(),sub=L.reduce((a,l)=>a+l.p,0),btw=Math.round(sub*.21),c=inv.color,ff=inv.font==='modern'?'-apple-system,Inter,system-ui,sans-serif':'Georgia,serif';
+ let rows='';
+ if(inv.split==='locatie'){[...new Set(L.map(l=>l.loc))].forEach(loc=>{rows+=`<tr><td colspan="2" style="padding-top:8px;font-weight:700;color:${c}">📍 ${loc}</td></tr>`;L.filter(l=>l.loc===loc).forEach(l=>rows+=`<tr><td>${l.n}</td><td style="text-align:right">${eur(l.p)}</td></tr>`)})}
+ else if(inv.split==='dag'){L.forEach(l=>{rows+=`<tr><td>${l.n}<div style="font-size:9px;color:#888">${l.bez} bezoeken à ${eur(Math.round(l.p/l.bez))}${inv.uren?' · '+l.u+' uur':''}</div></td><td style="text-align:right">${eur(l.p)}</td></tr>`})}
+ else L.forEach(l=>rows+=`<tr><td>${l.n}${inv.uren?`<div style="font-size:9px;color:#888">${l.u} uur</div>`:''}</td><td style="text-align:right">${eur(l.p)}</td></tr>`);
+ const qr='<div style="width:54px;height:54px;background:repeating-conic-gradient(#222 0 25%,#fff 0 50%) 0 0/9px 9px;border:3px solid #fff;outline:1px solid #ddd"></div>';
+ return `<div style="background:#fff;color:#222;font-family:${ff};font-size:11px;padding:26px 28px;border-radius:6px;box-shadow:0 6px 28px rgba(0,0,0,.18);min-height:560px;display:flex;flex-direction:column">
+ <div style="display:flex;justify-content:space-between;align-items:flex-start"><div>${inv.logo?`<div style="display:flex;gap:7px;align-items:center;font-weight:700;font-size:15px;color:${c}"><span style="width:22px;height:22px;border-radius:6px;background:${c};display:inline-block"></span>Schoonwerk</div>`:''}<div style="margin-top:14px;color:#666;line-height:1.5">${clients.actief[inv.klant][0]}<br>t.a.v. Anouk de Vries<br>Voorbeeldstraat 1, Amsterdam</div></div>
+ <div style="text-align:right"><div style="font-size:20px;font-weight:700;color:${c};letter-spacing:-.01em">${inv.tpl==='Creditnota'?'CREDITNOTA':'FACTUUR'}</div><div style="color:#666;line-height:1.6;margin-top:4px">Nr. 2026-0416<br>Datum 30 nov 2026<br>Vervalt 14 dec 2026${inv.periode?'<br>Periode nov 2026':''}</div></div></div>
+ ${inv.ref&&inv.velden.length?`<div style="margin-top:14px;display:flex;gap:16px;background:#f5f5f7;padding:7px 10px;border-radius:6px">${inv.velden.map(v=>`<div><span style="color:#888">${v[0]}</span><br><b>${v[1]}</b></div>`).join('')}</div>`:''}
+ <div style="margin-top:16px;color:#444;line-height:1.5">${fillv(inv.above)}</div>
+ <table style="width:100%;margin-top:12px;border-collapse:collapse"><tr style="border-bottom:2px solid ${c};color:#888;font-size:10px"><td style="padding:4px 0">Omschrijving</td><td style="text-align:right">Bedrag</td></tr>${rows}</table>
+ <div style="margin-left:auto;margin-top:12px;width:55%;line-height:1.8">${inv.btw?`<div style="display:flex;justify-content:space-between;color:#666"><span>Subtotaal</span><span>${eur(sub)}</span></div><div style="display:flex;justify-content:space-between;color:#666"><span>BTW 21%</span><span>${eur(btw)}</span></div>`:''}<div style="display:flex;justify-content:space-between;font-weight:700;font-size:13px;border-top:2px solid ${c};padding-top:3px;color:${c}"><span>Totaal</span><span>${eur(inv.btw?sub+btw:sub)}</span></div></div>
+ <div style="margin-top:14px;color:#444;line-height:1.5">${fillv(inv.below)}</div>
+ ${inv.fotos?`<div style="margin-top:10px;display:flex;gap:6px">${[1,2,3].map(()=>`<div style="width:46px;height:34px;border-radius:4px;background:linear-gradient(135deg,#cfe3ff,#e8f2fd)"></div>`).join('')}<span style="color:#888;align-self:center">Foto-rapportage bijgevoegd</span></div>`:''}
+ <div style="margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #eee;color:#888;font-size:9.5px;gap:12px"><span>${inv.foot}</span>${inv.qr?qr:''}</div></div>`}
+function updInv(){const el=$('#invpv');if(el)el.innerHTML=invHTML()}
+function setTpl(n){inv.tpl=n;Object.assign(inv,PRESET[n]);render()}
+function ins(v,w){const t=$('#'+w);t.value+=' {'+v+'}';inv[w]=t.value;updInv()}
+const fl=(k,l)=>`<label class="sw"><input type="checkbox" ${inv[k]?'checked':''} onchange="inv['${k}']=this.checked;updInv()"><span>${l}</span></label>`;
+V.fact=()=>`<div class="top"><div><h1>Factuurontwerp</h1><div class="sub">Ontwerp zelf hoe jouw factuur eruitziet. Geen bestand uploaden, direct zichtbaar, per klant verschillend.</div></div><div style="display:flex;gap:8px"><button class="btn ghost" onclick="toast('PDF-voorbeeld gedownload')">⬇ PDF-voorbeeld</button><button class="btn" onclick="toast('Opgeslagen. Nieuwe facturen gebruiken dit ontwerp.')">Opslaan</button></div></div>
+ <div class="seg" style="margin-bottom:16px">${Object.keys(PRESET).map(n=>`<button class="${inv.tpl===n?'on':''}" onclick="setTpl('${n}')">${n}</button>`).join('')}<button onclick="toast('Nieuw ontwerp gestart op basis van Standaard')">+ Nieuw</button></div>
+ <div class="grid gf" style="align-items:start">
+ <div style="display:grid;gap:14px">
+  <div class="card"><h3>Uiterlijk</h3><div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><span style="color:var(--mute);width:70px">Kleur</span>${KL.map(c=>`<button onclick="inv.color='${c}';render()" style="width:28px;height:28px;border-radius:50%;background:${c};outline:${inv.color===c?'3px solid var(--blue)':'0'};outline-offset:2px"></button>`).join('')}</div>
+   <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><span style="color:var(--mute);width:70px">Lettertype</span><div class="seg"><button class="${inv.font==='modern'?'on':''}" onclick="inv.font='modern';render()">Modern</button><button class="${inv.font==='klassiek'?'on':''}" onclick="inv.font='klassiek';render()">Klassiek</button></div></div>
+   <div style="display:flex;gap:10px;align-items:center"><span style="color:var(--mute);width:70px">Logo</span>${fl('logo','Tonen')}<button class="btn sm ghost" onclick="toast('Sleep je logo hierheen (PNG, SVG)')">⬆ Eigen logo</button></div></div>
+  <div class="card"><h3>Regels op de factuur</h3><div style="margin-bottom:12px"><div class="seg">${[['samen','Samengevoegd'],['locatie','Per locatie'],['dag','Per bezoek']].map(x=>`<button class="${inv.split===x[0]?'on':''}" onclick="inv.split='${x[0]}';render()">${x[1]}</button>`).join('')}</div></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">${fl('uren','Gewerkte uren tonen')}${fl('fotos','Foto-rapportage bijlage')}${fl('periode','Periode tonen')}${fl('btw','BTW-specificatie')}${fl('qr','Betaal-QR')}${fl('ref','Referentievelden')}</div></div>
+  <div class="card"><h3>Eigen velden <a onclick="inv.velden.push(['Nieuw veld','…']);render()">+ Veld</a></h3>${inv.velden.map((v,i)=>`<div style="display:flex;gap:8px;margin-bottom:8px"><input type="text" value="${v[0]}" oninput="inv.velden[${i}][0]=this.value;updInv()"><input type="text" value="${v[1]}" oninput="inv.velden[${i}][1]=this.value;updInv()"><button onclick="inv.velden.splice(${i},1);render()" style="color:var(--red);font-size:18px">×</button></div>`).join('')||'<div style="color:var(--mute)">Bijvoorbeeld kostenplaats, PO-nummer of VvE-nummer.</div>'}</div>
+  <div class="card"><h3>Teksten</h3><label style="font-size:13px;color:var(--mute)">Boven de regels</label><textarea id="above" rows="2" oninput="inv.above=this.value;updInv()" style="margin:4px 0 8px">${inv.above}</textarea>
+   <label style="font-size:13px;color:var(--mute)">Onder de regels</label><textarea id="below" rows="2" oninput="inv.below=this.value;updInv()" style="margin:4px 0 8px">${inv.below}</textarea>
+   <label style="font-size:13px;color:var(--mute)">Voettekst</label><textarea id="foot" rows="2" oninput="inv.foot=this.value;updInv()" style="margin:4px 0 10px">${inv.foot}</textarea>
+   <div style="font-size:12px;color:var(--mute);margin-bottom:6px">Klik om een variabele in te voegen (in "boven"):</div><div style="display:flex;gap:6px;flex-wrap:wrap">${VARS.map(v=>`<button class="pill p-b" onclick="ins('${v}','above')">{${v}}</button>`).join('')}</div></div>
+  <div class="card"><h3>Afwijkende opmaak per klant</h3>${clients.actief.map((c,i)=>`<div class="row"><div class="t"><b>${c[0]}</b></div><select style="width:150px" onchange="toast('${c[0]}: ontwerp gewijzigd')">${Object.keys(PRESET).map(n=>`<option ${(i==1&&n==='VvE-factuur')||(i==2&&n==='Horeca')||(i!=1&&i!=2&&n==='Standaard')?'selected':''}>${n}</option>`).join('')}</select></div>`).join('')}</div>
+ </div>
+ <div style="position:sticky;top:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="color:var(--mute);font-size:13px">Live voorbeeld</span><select style="width:190px" onchange="inv.klant=+this.value;render()">${clients.actief.map((c,i)=>`<option value="${i}" ${i===inv.klant?'selected':''}>${c[0]}</option>`).join('')}</select></div><div id="invpv">${invHTML()}</div></div></div>`;
+
+/* ================= NIEUW: verlof, inkoop, rollen, vergelijking ================= */
+V.verlof=()=>`<div class="top"><div><h1>Verlof & afwezigheid</h1><div class="sub">Aanvragen goedkeuren met direct zicht op de gevolgen voor de planning</div></div></div>
+<div class="grid g2"><div class="card"><h3>Aanvragen</h3>
+ ${[['Mo El Amrani','9 jan – 25 jan','Raakt 14 diensten · vervanger voorgesteld: Eva'],['Lotte Bakker','2 dec','Raakt 1 dienst · geen conflict'],['Eva Jansen','24 dec – 31 dec','Raakt 6 diensten · 2 nog open']].map((r,i)=>`<div class="row">${av(r[0],i)}<div class="t"><b>${r[0]} · ${r[1]}</b><span>${r[2]}</span></div><button class="btn sm" onclick="toast('Goedgekeurd, planning bijgewerkt')">Goedkeuren</button><button class="btn sm ghost" onclick="toast('Afgewezen')">Afwijzen</button></div>`).join('')}</div>
+<div class="card"><h3>Nu afwezig</h3><div class="row">${av('Ravi Singh',3)}<div class="t"><b>Ravi Singh</b><span>Ziek sinds 18 nov · dag 6</span></div><span class="pill p-r">Ziek</span></div><div class="row">${av('Sanne de Wit',0)}<div class="t"><b>Sanne de Wit</b><span>Verlof tot 27 nov</span></div><span class="pill p-b">Verlof</span></div>
+<div class="ai" style="margin-top:12px">🤖 Ravi is al 6 dagen ziek. Wil je een herstelgesprek plannen? De bedrijfsarts is gekoppeld.</div></div></div>`;
+
+V.inkoop=()=>`<div class="top"><div><h1>Inkoop & bank</h1><div class="sub">Betalingen automatisch koppelen aan facturen, en een nette export voor de boekhouder</div></div><button class="btn" onclick="toast('Bank gekoppeld (voorbeeld)')">🏦 Bank koppelen</button></div>
+<div class="grid g4"><div class="card kpi"><div class="l">Banksaldo</div><div class="v">€ 18.240</div></div><div class="card kpi"><div class="l">Te betalen</div><div class="v">€ 4.120</div><div class="d">5 facturen</div></div><div class="card kpi"><div class="l">Te ontvangen</div><div class="v">€ 6.180</div><div class="d down">3 te laat</div></div><div class="card kpi"><div class="l">BTW dit kwartaal</div><div class="v">€ 3.870</div><div class="d">Aangifte klaar op 30 jan</div></div></div>
+<div class="grid g2" style="margin-top:16px"><div class="card"><h3>Banktransacties</h3>${[['Kantoor Zuidas','+ € 4.820','Gekoppeld aan 2026-0412','p-g'],['Schoonmaakhandel BV','− € 612','Inkoop: middelen','p-g'],['VvE De Linde','+ € 700','Voorstel: 2026-0413','p-a'],['Onbekend','+ € 120','Geen match','p-r']].map(r=>`<div class="row"><div class="t"><b>${r[0]}</b><span>${r[2]}</span></div><b>${r[1]}</b><span class="pill ${r[3]}">${r[3]=='p-g'?'Klaar':r[3]=='p-a'?'Controleer':'Open'}</span></div>`).join('')}<div class="ai" style="margin-top:10px">🤖 18 van 21 transacties automatisch gekoppeld.</div></div>
+<div style="display:grid;gap:16px;align-content:start"><div class="card"><h3>Boekhoud-koppelingen</h3><div style="display:flex;gap:8px;flex-wrap:wrap">${['Exact','Moneybird','Twinfield','e-Boekhouden','Snelstart'].map(x=>`<button class="pill p-b" onclick="toast('${x}: koppeling instellen')">${x}</button>`).join('')}</div></div>
+<div class="card"><h3>Salaris-export voor de accountant</h3><div style="color:var(--mute);font-size:14px;margin-bottom:10px">Uren, toeslagen, verlof en ziekte per medewerker, klaar voor de loonrun.</div><button class="btn ghost" onclick="toast('Export november gemaakt (CSV)')">⬇ Export november</button></div></div></div>`;
+
+const ROLES=['Eigenaar','Planner','Teamleider','Medewerker','Klant','Accountant'];
+const MODS=['Dashboard','Planning','Klanten','Opdrachten','Medewerkers','Uren & marge','Facturen','Factuurontwerp','Checklists','Voorraad'];
+const RM=[[2,2,2,2,2,2,2,2,2,2],[1,2,2,2,0,1,0,0,1,1],[1,2,1,1,1,1,0,0,2,2],[0,1,0,0,0,0,0,0,1,0],[0,0,0,0,0,0,1,0,1,0],[1,0,1,0,0,1,2,0,0,0]];
+const RL=['—','👁 Lezen','✎ Bewerken'],RC=['var(--mute)','var(--blue)','var(--green)'];
+V.rollen=()=>`<div class="top"><div><h1>Rollen & rechten</h1><div class="sub">Bepaal per rol wie wat ziet en mag aanpassen. Klik op een vakje om te wisselen.</div></div><button class="btn ghost" onclick="toast('Nieuwe rol toegevoegd')">+ Rol</button></div>
+<div class="card" style="padding:8px 10px;overflow-x:auto"><table><tr><th></th>${ROLES.map(r=>`<th style="text-align:center">${r}</th>`).join('')}</tr>${MODS.map((m,mi)=>`<tr><td><b>${m}</b></td>${ROLES.map((r,ri)=>`<td style="text-align:center"><button onclick="RM[${ri}][${mi}]=(RM[${ri}][${mi}]+1)%3;render()" style="color:${RC[RM[ri][mi]]};font-weight:600;font-size:13px;padding:4px 8px;border-radius:8px;background:var(--bg)">${RL[RM[ri][mi]]}</button></td>`).join('')}</tr>`).join('')}</table></div>`;
+
+const CMP_HAS=[
+ ['Klantenportaal','Klanten vragen extra schoonmaak, klussen en producten aan en chatten met het bedrijf. Alles bij de juiste persoon.','Ontbreekt'],
+ ['Dashboard van de dag','Live wie waar werkt, omzet, marge en wat actie nodig heeft.','Losse tabellen, 5 regels per pagina'],
+ ['Marge per opdracht + AI','Marge uit in- en uitkloktijden, met voorstel voor prijs of tijd.','Financieel overzicht staat op € 0, geen marge per opdracht'],
+ ['AI-planning','Voorstel voor vervanging en minder reistijd.','Ontbreekt'],
+ ['Slepen en herhalen in 1 klik','Dienst verplaatsen met slepen, herhaling met dubbelklik.','Rooster als lijst, herhalingen handmatig'],
+ ['Eigen factuurontwerp met live voorbeeld','Kleur, logo, regels per locatie/bezoek, eigen velden en variabelen, per klant een eigen ontwerp.','Geüpload .odt-bestand, één template voor iedereen, geen voorbeeld, 2 variabelen'],
+ ['Klantstatussen','Actief, prospect en oud gescheiden.','Eén lange lijst met alleen een "Inactive"-schakelaar'],
+ ['Eén klant- en medewerkerskaart','Alles op één pagina.','Meer dan 10 tabs per locatie en per medewerker'],
+ ['Opdracht als centraal scherm','Wanneer, wie, prijs, checklist en factuur samen, met live marge.','Verspreid over planning, locatie-tabs en facturen'],
+ ['Checklists gekoppeld aan opdracht','Sjabloon met foto-verplicht en ja/nee, afvinken in de app.','Formulieren bestaan, maar leeg en niet gekoppeld'],
+ ['Urencontrole met tolerantie','Afwijkingen binnen X minuten automatisch goedkeuren.','Meer dan duizend afwijkingen handmatig bevestigen'],
+ ['Documenten met vervaldata','Herinnering per document (VOG, VCA, ID).','Alleen contracteinddatum'],
+ ['Snel zoeken (⌘K)','Eén zoekbalk voor klanten, acties en schermen.','Menu met meer dan 10 modules en lange submenu\'s'],
+ ['Rustig, Apple-achtig ontwerp','Weinig klikken, veel witruimte, één hoofdactie per scherm.','Android-achtig, veel knoppen en filters']];
+const CMP_EQ=[
+ ['Locaties op een kaart','Kaart met kleur per categorie.'],['NFC-tags, sleutels, machines en voertuigen','Middelen per locatie, met onderhoud en wie wat heeft.'],['Jaaroverzicht en contracturen','Rapporten met export naar PDF en Excel.'],
+ ['BTW-overzicht en resultaat','Duidelijk overzicht voor jou en de accountant.'],['Salaris-voorbereiding','Uren, toeslagen en correcties in een stappenplan.'],['Importeren','Wizard met automatische kolomherkenning.'],
+ ['Feestdagen, werkschema\'s en nieuws','Instellingen en bericht aan medewerkers met telefoonvoorbeeld.'],['Prijzen indexeren','Alle opdrachten in één keer verhogen.'],['E-factuur status','Verstuurd, afgeleverd, geaccepteerd, betaald.'],['2-staps-verificatie en API-sleutels','Beveiliging en koppelingen.']];
+const CMP_MISS=[
+ ['Volledige boekhouding','Grootboek, journaalposten, balans en echte BTW-aangifte. De preview toont alleen overzichten.'],
+ ['Echte loonberekening','Toeslagen, correcties en uitbetalingen. De preview toont het stappenplan met voorbeeldcijfers.'],
+ ['Echt scannen en GPS','NFC-scan en locatiecontrole bij inklokken kan alleen in een echte app.'],
+ ['Echte bank- en Peppol-koppeling','Voorbeeldschermen tonen hoe het eruit komt te zien.'],
+ ['Opslag, accounts en echte AI','Alles is nu voorbeelddata. Een echte versie heeft een server en inloggen nodig.'],
+ ['Offline werken en native iPhone-app','De medewerker-app is nu een ontwerp, nog geen installeerbare app.']];
+V.vergelijk=()=>`<div class="top"><div><h1>Vergelijking met Klien IT</h1><div class="sub">Wat deze software beter doet, waar hij gelijkwaardig is en wat er nog gebouwd moet worden</div></div></div>
+<div class="card"><h3>Beter dan Klien IT <span class="pill p-g">${CMP_HAS.length} punten</span></h3><table><tr><th style="width:24%">Onderdeel</th><th>Nieuwe software</th><th style="width:30%">Klien IT nu</th></tr>${CMP_HAS.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td style="color:var(--red)">${r[2]}</td></tr>`).join('')}</table></div>
+<div class="card" style="margin-top:16px"><h3>Gelijkwaardig, nu ook in de preview <span class="pill p-b">${CMP_EQ.length} punten</span></h3>${CMP_EQ.map(r=>`<div class="row"><div class="t"><b>${r[0]}</b><span>${r[1]}</span></div><span class="pill p-g">✓</span></div>`).join('')}</div>
+<div class="card" style="margin-top:16px"><h3>Nog te bouwen voor een echte versie <span class="pill p-a">${CMP_MISS.length} punten</span></h3>${CMP_MISS.map(r=>`<div class="row"><div class="t"><b>${r[0]}</b><span>${r[1]}</span></div></div>`).join('')}</div>`;
+
+/* ================= NIEUW: zoeken (⌘K) ================= */
+const ACT=[['Dashboard','dash'],['Planning','plan'],['Klanten','klant'],['Opdrachten','opdr'],['Checklists','chk'],['Medewerkers','team'],['Uren & marge','uren'],['Offertes & facturen','fin'],['Factuurontwerp','fact'],['Verlof','verlof'],['Inkoop & bank','inkoop'],['Voorraad','stock'],['Berichten','inbox'],['Rollen & rechten','rollen'],['Vergelijking met Klien IT','vergelijk'],['Locaties op de kaart','kaart2'],['Middelen','mid'],['Salaris','sal'],['Boekhouding','bk'],['Rapporten','rap'],['Instellingen','inst']];
+function pal(open){const p=$('#pal');if(!open){p.classList.add('hide');return}p.classList.remove('hide');const i=$('#pin');i.value='';palList('');i.focus()}
+function palList(q){q=q.toLowerCase();const it=[...ACT.map(a=>[a[0],()=>go(a[1]),'Ga naar']),...clients.actief.map((c,i)=>[c[0],()=>{go('klant');sel.klant=i;render()},'Klant']),...staff.map((s,i)=>[s.n,()=>{go('team');sel.team=i;render()},'Medewerker']),['Nieuwe opdracht',()=>{sel.opdr=-1;go('opdr')},'Actie'],['Nieuwe dienst plannen',()=>go('plan'),'Actie'],['Factuur ontwerpen',()=>go('fact'),'Actie']].filter(x=>x[0].toLowerCase().includes(q)).slice(0,8);
+ window._pi=it;$('#plist').innerHTML=it.map((x,i)=>`<button class="pi" onclick="pal(false);_pi[${i}][1]()"><span>${x[0]}</span><small>${x[2]}</small></button>`).join('')||'<div style="padding:14px;color:var(--mute)">Niets gevonden</div>'}
+document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();pal(true)}if(e.key==='Escape')pal(false);if(e.key==='Enter'&&!$('#pal').classList.contains('hide')&&window._pi?.[0]){pal(false);_pi[0][1]()}});
+
+/* ================= ROUND 2: kaart, middelen, rapporten, boekhouding, salaris, instellingen ================= */
+const CAT={Kantoor:'#0071e3',VvE:'#30a46c',Horeca:'#e08a00',Sport:'#8e5cd9',Zorg:'#e5484d'};
+const LOC=[{n:'Kantoor Zuidas',c:'Kantoor',x:310,y:62,a:'Zuidasdok 12'},{n:'VvE De Linde',c:'VvE',x:118,y:104,a:'Lindelaan 4'},{n:'Café Centraal',c:'Horeca',x:208,y:150,a:'Stationsplein 2'},{n:'Sportschool Fit',c:'Sport',x:84,y:214,a:'Sportlaan 18'},{n:'Makelaardij Berg',c:'Kantoor',x:324,y:196,a:'Bergweg 9'},{n:'Tandarts Oost',c:'Zorg',x:252,y:240,a:'Oosterpark 3'},{n:'VvE Havenzicht',c:'VvE',x:160,y:60,a:'Havenkade 21'},{n:'Restaurant Duin',c:'Horeca',x:46,y:130,a:'Duinweg 7'}];
+V.kaart2=()=>{const l=LOC[sel.loc];
+ return `<div class="top"><div><h1>Locaties</h1><div class="sub">Al je klantlocaties op de kaart, met kleur per categorie</div></div><div class="seg">${Object.keys(CAT).map(k=>`<button style="color:${CAT[k]}">● ${k}</button>`).join('')}</div></div>
+ <div class="grid" style="grid-template-columns:2fr 1fr;align-items:start" id="mapg"><div class="card" style="padding:0;overflow:hidden"><svg viewBox="0 0 400 290" style="width:100%;display:block;background:var(--bg)">
+  <rect width="400" height="290" fill="var(--bg)"/><path d="M0 188 C90 170 140 225 230 200 S360 170 400 190 L400 215 C350 195 250 235 200 225 S60 195 0 212Z" fill="#cfe6ff" opacity=".7"/>
+  ${[[0,100,400,100],[0,30,400,30],[0,260,400,260],[60,0,60,290],[170,0,170,290],[280,0,280,290],[360,0,360,290]].map(r=>`<line x1="${r[0]}" y1="${r[1]}" x2="${r[2]}" y2="${r[3]}" stroke="var(--line)" stroke-width="5"/>`).join('')}
+  ${[[75,40,80,50],[185,40,85,50],[295,40,55,50],[75,110,85,60],[185,110,85,60],[295,110,55,60],[75,235,85,18],[295,230,60,24]].map(r=>`<rect x="${r[0]}" y="${r[1]}" width="${r[2]}" height="${r[3]}" rx="6" fill="var(--card)" opacity=".8"/>`).join('')}
+  ${LOC.map((p,i)=>`<g onclick="sel.loc=${i};render()" style="cursor:pointer"><circle cx="${p.x}" cy="${p.y}" r="${i===sel.loc?15:10}" fill="${CAT[p.c]}" opacity=".25"/><circle cx="${p.x}" cy="${p.y}" r="${i===sel.loc?8:6}" fill="${CAT[p.c]}" stroke="#fff" stroke-width="2"/></g>`).join('')}</svg></div>
+ <div style="display:grid;gap:14px"><div class="card"><div style="display:flex;gap:10px;align-items:center"><span class="pill" style="background:${CAT[l.c]};color:#fff">${l.c}</span></div><h3 style="margin:10px 0 2px">${l.n}</h3><div style="color:var(--mute)">${l.a}</div><div class="row"><div class="t"><b>Vandaag</b><span>06:00 · Sanne de Wit</span></div><span class="pill p-g">Gepland</span></div><div class="row"><div class="t"><b>Sleutel</b><span>Bij Sanne · NFC-tag bij ingang</span></div></div><button class="btn sm" style="margin-top:10px" onclick="go('klant')">Open klantkaart</button></div>
+ <div class="card" style="padding:8px">${LOC.map((p,i)=>`<button class="nav ${i===sel.loc?'on':''}" onclick="sel.loc=${i};render()"><span style="width:10px;height:10px;border-radius:50%;background:${CAT[p.c]}"></span>${p.n}</button>`).join('')}</div></div></div>`};
+
+const MID={nfc:['NFC-tags',[['Hoofdingang · Kantoor Zuidas','Actief','Gescand vandaag 06:02'],['Keuken · Café Centraal','Actief','Gescand vandaag 10:31'],['Trappenhuis · VvE De Linde','Actief','Gescand gisteren'],['Kleedkamer · Sportschool Fit','Batterij laag','Gescand gisteren']]],
+ keys:['Sleutels',[['Sleutel Kantoor Zuidas','Sanne de Wit','Uitgegeven 3 jan'],['Sleutel VvE De Linde','Mo El Amrani','Uitgegeven 12 feb'],['Sleutelkastje Café Centraal','Code gewijzigd 1 nov','Op locatie'],['Sleutel Tandarts Oost','Op kantoor','Beschikbaar']]],
+ mach:['Machines',[['Schrobzuiger Nilfisk','Kantoor Zuidas','Onderhoud 14 jan'],['Hogedrukspuit Kärcher','Magazijn','In orde'],['Stofzuiger Vorwerk x4','Wisselend','2 voor reparatie']]],
+ cars:['Voertuigen',[['Bestelbus VW Caddy','Mo El Amrani','APK 2 mrt'],['Bestelbus Renault Kangoo','Sanne de Wit','Beurt 20 dec'],['Elektrische bakfiets','Lotte Bakker','In orde']]]};
+V.mid=()=>`<div class="top"><div><h1>Middelen</h1><div class="sub">NFC-tags, sleutels, machines en voertuigen. Wie heeft wat, en wat moet er onderhouden worden.</div></div><button class="btn" onclick="toast('Middel toevoegen')">+ Middel</button></div>
+<div class="seg" style="margin-bottom:16px">${Object.keys(MID).map(k=>`<button class="${sel.mid===k?'on':''}" onclick="sel.mid='${k}';render()">${MID[k][0]}</button>`).join('')}</div>
+<div class="card">${MID[sel.mid][1].map((r,i)=>`<div class="row"><div class="av" style="background:${COL[i%6]}">${'🏷️🔑🧹🚐'[['nfc','keys','mach','cars'].indexOf(sel.mid)*2]}</div><div class="t"><b>${r[0]}</b><span>${r[1]}</span></div><span class="pill ${/laag|reparatie|APK|Onderhoud|Beurt/.test(r[1]+r[2])?'p-a':'p-g'}">${r[2]}</span></div>`).join('')}</div>`;
+
+V.rap=()=>{const M=[['Jan',31],['Feb',29],['Mrt',33],['Apr',34],['Mei',35],['Jun',31],['Jul',33],['Aug',32],['Sep',35],['Okt',36],['Nov',38],['Dec',0]];
+ return `<div class="top"><div><h1>Rapporten</h1><div class="sub">Jaaroverzicht en contracturen, klaar om te delen of te exporteren</div></div><div style="display:flex;gap:8px"><button class="btn ghost" onclick="toast('PDF gemaakt')">⬇ PDF</button><button class="btn ghost" onclick="toast('Excel gemaakt')">⬇ Excel</button></div></div>
+ <div class="card"><h3>Omzet per maand · 2026 <span class="pill p-g">€ 368.000 tot nu toe</span></h3><div style="display:flex;gap:10px;align-items:flex-end;height:170px">${M.map(m=>`<div style="flex:1;text-align:center"><div style="height:${m[1]*4}px;background:${m[1]?'linear-gradient(180deg,var(--blue),#4cc3ff)':'var(--line)'};border-radius:8px 8px 3px 3px;min-height:4px" title="€ ${m[1]}k"></div><div style="font-size:12px;color:var(--mute);margin-top:6px">${m[0]}</div></div>`).join('')}</div></div>
+ <div class="grid g2" style="margin-top:16px"><div class="card"><h3>Contracturen vs. gepland</h3>${staff.map((s,i)=>{const [a,b]=s.h.split(' / ').map(Number);const p=Math.min(100,a/b*100);return `<div class="row">${av(s.n,i)}<div class="t"><b>${s.n}</b><div class="bar" style="margin-top:6px"><i style="width:${p}%;background:${p<70?'var(--amber)':'var(--green)'}"></i></div></div><span class="pill ${p<70?'p-a':'p-g'}">${a} / ${b} u</span></div>`}).join('')}</div>
+ <div class="card"><h3>Omzet per klant</h3>${clients.actief.map((c,i)=>{const t=clients.actief.reduce((a,x)=>a+x[2],0);return `<div class="row"><div class="t"><b>${c[0]}</b><div class="bar" style="margin-top:6px"><i style="width:${c[2]/t*100*2}%;background:${COL[i%6]}"></i></div></div><b>${eur(c[2])}</b></div>`}).join('')}</div></div>`};
+
+const BKT=[['btw','BTW-aangifte'],['res','Resultaat'],['efac','E-facturen']];
+V.bk=()=>`<div class="top"><div><h1>Boekhouding</h1><div class="sub">Een duidelijk overzicht voor jou en de accountant. De volledige boekhouding blijft in je boekhoudpakket.</div></div><button class="btn ghost" onclick="toast('Pakket naar de accountant gestuurd')">Stuur naar accountant</button></div>
+<div class="seg" style="margin-bottom:16px">${BKT.map(t=>`<button class="${sel.bk===t[0]?'on':''}" onclick="sel.bk='${t[0]}';render()">${t[1]}</button>`).join('')}</div>
+${sel.bk==='btw'?`<div class="grid g2"><div class="card"><h3>BTW Q4 2026 <span class="pill p-a">Open</span></h3>${[['1a. Omzet hoog tarief (21%)','€ 113.400'],['Verschuldigde BTW','€ 23.814'],['5b. Voorbelasting','€ 19.944'],['Te betalen','€ 3.870']].map((r,i)=>`<div class="row"><div class="t"><b>${r[0]}</b></div><b style="${i==3?'color:var(--blue);font-size:18px':''}">${r[1]}</b></div>`).join('')}<button class="btn" style="margin-top:12px" onclick="toast('Aangifte klaargezet als concept')">Concept-aangifte maken</button></div>
+<div class="card"><h3>Controles</h3>${[['Alle facturen gekoppeld aan een BTW-code','p-g','OK'],['3 inkoopfacturen zonder bon','p-a','Controleer'],['Bankmutaties gematcht: 18 van 21','p-a','3 open']].map(r=>`<div class="row"><div class="t"><b>${r[0]}</b></div><span class="pill ${r[1]}">${r[2]}</span></div>`).join('')}</div></div>`
+:sel.bk==='res'?`<div class="card"><h3>Resultaat november</h3>${[['Omzet',38420,100,'var(--blue)'],['Loonkosten',-23700,62,'var(--amber)'],['Inkoop en middelen',-2100,6,'var(--amber)'],['Overige kosten',-1850,5,'var(--amber)'],['Resultaat',10770,28,'var(--green)']].map(r=>`<div class="row"><div class="t"><b>${r[0]}</b><div class="bar" style="margin-top:6px"><i style="width:${r[2]}%;background:${r[3]}"></i></div></div><b>${r[1]<0?'− ':''}${eur(Math.abs(r[1]))}</b></div>`).join('')}</div>`
+:`<div class="card"><h3>E-facturen (Peppol)</h3>${[['2026-0415','Sportschool Fit','Afgeleverd','p-b'],['2026-0414','Café Centraal','Geaccepteerd','p-g'],['2026-0413','VvE De Linde','Verstuurd','p-a'],['2026-0412','Kantoor Zuidas','Betaald','p-g']].map(r=>`<div class="row"><div class="t"><b>${r[0]}</b><span>${r[1]}</span></div><span class="pill ${r[3]}">${r[2]}</span></div>`).join('')}</div>`}`;
+
+const SALD=[[0,32,0,0],[1,38,2,0],[2,24,0,-1],[3,6,0,0],[4,16,0,0]];
+V.sal=()=>{const steps=['Uren gecontroleerd','Toeslagen berekend','Export gemaakt','Naar accountant'];
+ return `<div class="top"><div><h1>Salaris</h1><div class="sub">Loonrun november: de uren en toeslagen die de accountant nodig heeft</div></div><button class="btn" onclick="sel.sal=Math.min(4,sel.sal+1);render();toast('Stap afgerond')">Volgende stap</button></div>
+ <div class="card" style="display:flex;gap:8px;margin-bottom:16px">${steps.map((t,i)=>`<div style="flex:1;text-align:center"><div style="height:6px;border-radius:9px;background:${i<sel.sal?'var(--green)':'var(--line)'};margin-bottom:6px"></div><span style="font-size:13px;color:${i<sel.sal?'var(--green)':'var(--mute)'}">${i<sel.sal?'✓ ':''}${t}</span></div>`).join('')}</div>
+ <div class="card" style="padding:6px 10px"><table><tr><th>Medewerker</th><th>Uren</th><th>Toeslag</th><th>Correctie</th><th>Status</th></tr>${SALD.map(r=>`<tr class="click"><td><div style="display:flex;gap:10px;align-items:center">${av(staff[r[0]].n,r[0])}<b>${staff[r[0]].n}</b></div></td><td>${r[1]} u</td><td>${r[2]?r[2]+' u 125%':'–'}</td><td>${r[3]?r[3]+' u':'–'}</td><td><span class="pill ${r[0]==3?'p-r':'p-g'}">${r[0]==3?'Ziek: let op':'Klaar'}</span></td></tr>`).join('')}</table></div>`};
+
+const FEEST=[['Eerste kerstdag','25 dec','Toeslag 200%'],['Tweede kerstdag','26 dec','Toeslag 200%'],['Nieuwjaarsdag','1 jan','Toeslag 200%'],['Koningsdag','27 apr','Normaal tarief'],['Hemelvaartsdag','6 mei','Normaal tarief']];
+const IMPT=['Klanten','Medewerkers','Locaties','Grootboek'];
+let news='Beste team, vanaf maandag werken we met de nieuwe app. Klok in via de grote groene knop!';
+V.inst=()=>{const T=[['feest','Feestdagen'],['schema','Werkschema\'s'],['nieuws','Nieuws'],['beveil','Beveiliging'],['import','Importeren']];
+ const body=sel.inst==='feest'?`<div class="card">${FEEST.map(f=>`<div class="row"><div class="t"><b>${f[0]}</b><span>${f[1]}</span></div><select style="width:170px"><option ${f[2].includes('200')?'selected':''}>Toeslag 200%</option><option ${f[2].includes('Normaal')?'selected':''}>Normaal tarief</option><option>Vrij</option></select></div>`).join('')}</div>`
+ :sel.inst==='schema'?`<div class="card">${[['Voltijd 40 uur',[1,1,1,1,1,0,0]],['4 × 8 uur',[1,1,1,1,0,0,0]],['Ochtendploeg 06:00–12:00',[1,1,1,1,1,1,0]],['Weekend',[0,0,0,0,0,1,1]]].map(r=>`<div class="row"><div class="t"><b>${r[0]}</b></div><div style="display:flex;gap:4px">${DAG.map((d,x)=>`<span class="pill ${r[1][x]?'p-b':''}" style="${r[1][x]?'':'background:var(--bg);color:var(--mute)'}">${d}</span>`).join('')}</div></div>`).join('')}</div>`
+ :sel.inst==='nieuws'?`<div class="grid g2"><div class="card"><h3>Bericht aan medewerkers</h3><textarea rows="5" oninput="news=this.value;const e=$('#nw');if(e)e.textContent=news">${news}</textarea><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" onclick="toast('Verstuurd naar 5 medewerkers')">Verstuur</button><button class="btn ghost" onclick="toast('Ingepland voor maandag 07:00')">Plan in</button></div></div><div class="phone"><div style="font-size:12px;color:var(--mute)">Nieuws</div><div class="card" style="padding:12px;margin-top:8px"><b>Schoonwerk</b><div id="nw" style="font-size:14px;margin-top:4px">${news}</div></div></div></div>`
+ :sel.inst==='beveil'?`<div class="grid g2"><div class="card"><h3>Inloggen</h3><label class="sw"><input type="checkbox" checked onchange="toast(this.checked?'2-staps-verificatie aan':'2-staps-verificatie uit')"><span>2-staps-verificatie (aanbevolen)</span></label><div class="row"><div class="t"><b>Laatste inlog</b><span>Vandaag 08:48 · Chrome op Linux</span></div></div></div><div class="card"><h3>API-sleutels <a onclick="toast('Nieuwe sleutel gemaakt: sk_live_••••9f2a')">+ Sleutel</a></h3><div class="row"><div class="t"><b>Boekhoudkoppeling</b><span>sk_live_••••41c8 · aangemaakt 3 okt</span></div><button class="pill p-r" onclick="toast('Sleutel ingetrokken')">Intrekken</button></div></div></div>`
+ :`<div class="card"><h3>Importeren uit Excel of CSV</h3><div class="seg" style="margin-bottom:14px">${IMPT.map((t,i)=>`<button class="${sel.imp===i?'on':''}" onclick="sel.imp=${i};render()">${t}</button>`).join('')}</div><div style="border:2px dashed var(--line);border-radius:16px;padding:28px;text-align:center;color:var(--mute);cursor:pointer" onclick="toast('Bestand gekozen: ${IMPT[sel.imp].toLowerCase()}.csv · kolommen automatisch herkend')">⬆ Sleep je bestand hierheen of klik<br><small>We herkennen de kolommen zelf</small></div>
+ <table style="margin-top:14px"><tr><th>Kolom in jouw bestand</th><th>Wordt</th><th></th></tr>${[['Naam bedrijf','Naam'],['Adres','Straat'],['E-mail facturatie','Factuur-e-mail']].map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td><td><span class="pill p-g">Herkend</span></td></tr>`).join('')}</table><button class="btn" style="margin-top:12px" onclick="toast('40 ${IMPT[sel.imp].toLowerCase()} geïmporteerd (voorbeeld)')">Importeer</button></div>`;
+ return `<div class="top"><div><h1>Instellingen</h1><div class="sub">Feestdagen, werkschema's, nieuws, beveiliging en importeren</div></div></div><div class="seg" style="margin-bottom:16px;max-width:100%;overflow-x:auto">${T.map(t=>`<button class="${sel.inst===t[0]?'on':''}" onclick="sel.inst='${t[0]}';render()">${t[1]}</button>`).join('')}</div>${body}`};
+
+/* ================= ROUND 2: welkom, rondleiding ================= */
+const TOUR=[['dash','Dashboard','Alles van vandaag op één scherm: wie werkt waar, omzet, marge en wat jouw aandacht vraagt.'],['plan','Planning','Sleep een dienst naar een andere dag of persoon. Dubbelklik om te herhalen.'],['klant','Klanten','Actief, prospect en oud gescheiden. Eén klik naar de volledige klantkaart.'],['opdr','Opdrachten','Wanneer, wie, prijs en checklist op één scherm, met live marge.'],['fact','Factuurontwerp','Ontwerp zelf je factuur, per klant anders, met direct voorbeeld.'],['portal','Klantportaal','Zo ziet jouw klant het: aanvragen, volgen en berichten.'],['vergelijk','Vergelijking','Wat beter is dan Klien IT, wat gelijkwaardig is en wat nog gebouwd moet worden.']];
+let tI=-1;
+function tour(i){tI=i;const t=$('#tour');if(i<0||i>=TOUR.length){t.classList.add('hide');if(mode!=='office')setMode('office');return}const s=TOUR[i];if(s[0]==='portal')setMode('portal');else{if(mode!=='office')setMode('office');go(s[0])}
+ t.classList.remove('hide');t.innerHTML=`<div style="display:flex;gap:6px;margin-bottom:10px">${TOUR.map((x,n)=>`<i style="flex:1;height:4px;border-radius:9px;background:${n<=i?'var(--blue)':'var(--line)'}"></i>`).join('')}</div><b style="font-size:17px">${s[1]}</b><div style="color:var(--mute);margin:4px 0 14px">${s[2]}</div><div style="display:flex;gap:8px;justify-content:space-between"><button class="btn sm ghost" onclick="tour(-1)">Sluiten</button><div style="display:flex;gap:8px">${i>0?`<button class="btn sm ghost" onclick="tour(${i-1})">Vorige</button>`:''}<button class="btn sm" onclick="tour(${i+1})">${i===TOUR.length-1?'Klaar':'Volgende'}</button></div></div>`}
+function setMode(m){mode=m;$$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));render()}
+function welcome(start){$('#wel').classList.add('gone');try{sessionStorage.setItem('seen','1')}catch(e){}if(start)tour(0)}
+try{if(sessionStorage.getItem('seen'))$('#wel').classList.add('gone')}catch(e){}
+
+/* ---------- shell ---------- */
+let mode='office',view='dash';
+function go(v){view=v;sel.klant=null;sel.team=null;mode='office';render();$$('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m==='office'))}
+function render(){
+ const r=$('#root');
+ if(mode==='portal'){r.innerHTML=`<div class="portal" style="min-height:100vh">${V.portal()}</div>`;return}
+ if(mode==='app'){r.innerHTML=V.app();return}
+ r.innerHTML=`<div class="app"><aside><div class="brand"><i></i>Schoonwerk</div>${(()=>{const open=moreOpen||nav.some(n=>n[3]&&n[0]===view);return nav.map(n=>n[0]==='Meer'?`<button class="sec msec" onclick="moreOpen=!moreOpen;render()">Meer ${open?'▴':'▾'}</button>`:n.length===1?`<div class="sec">${n[0]}</div>`:`<button class="nav ${n[3]?'more':''} ${n[3]&&!open?'hide':''} ${view===n[0]?'on':''}" onclick="go('${n[0]}')"><span class="ic">${n[1]}</span>${n[2]}${n[0]==='inbox'?'<span class="badge">2</span>':''}</button>`).join('')})()}<div class="sp"></div><div class="who"><span class="demo">Voorbeeld · fictieve data</span><br>C.J. Kam · Eigenaar</div></aside><main>${V[view]()}</main></div>`;
+ if(view==='plan')wirePlan();if(view==='opdr')upd();if(view==='uren')tolU();if(view==='chk')pv();
+}
+$$('#modeSeg button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('#modeSeg button').forEach(x=>x.classList.toggle('on',x===b));render()});
+render();
+</script>
+</body>
+</html>
