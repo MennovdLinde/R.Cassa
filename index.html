@@ -972,7 +972,7 @@ function render(){
  const r=$('#root');$('.mode').classList.toggle('flow',mode!=='office');
  if(mode==='portal'){r.innerHTML=`<div class="portal" style="min-height:100vh">${V.portal()}</div>`;return}
  if(mode==='app'){r.innerHTML=V.app();return}
- r.innerHTML=`<div class="app"><aside><div class="brand"><img src="${LOGO}" alt="R. Cassa" style="height:46px"></div>${(()=>{const open=moreOpen||nav.some(n=>n[3]&&n[0]===view);return nav.map(n=>n[0]==='Meer'?`<button class="sec msec" onclick="moreOpen=!moreOpen;render()">Meer ${open?'▴':'▾'}</button>`:n.length===1?`<div class="sec">${n[0]}</div>`:`<button class="nav ${n[3]?'more':''} ${n[3]&&!open?'hide':''} ${view===n[0]?'on':''}" onclick="go('${n[0]}')"><span class="ic">${n[1]}</span>${n[2]}${n[0]==='inbox'?`<span class="badge">${reqs.length}</span>`:''}</button>`).join('')})()}<div class="sp"></div><div class="who"><span class="demo">Voorbeeld · fictieve data</span><br>C.J. Kam · Eigenaar</div></aside><main>${V[view]()}</main></div>`;
+ r.innerHTML=`<div class="app"><aside><div class="brand"><img src="${LOGO}" alt="R. Cassa" style="height:46px"></div>${(()=>{const open=true;return nav.map(n=>n[0]==='Meer'?`<div class="sec">Meer</div>`:n.length===1?`<div class="sec">${n[0]}</div>`:`<button class="nav ${n[3]?'more':''} ${n[3]&&!open?'hide':''} ${view===n[0]?'on':''}" onclick="go('${n[0]}')"><span class="ic">${n[1]}</span>${n[2]}${n[0]==='inbox'?`<span class="badge">${reqs.length}</span>`:''}</button>`).join('')})()}<div class="sp"></div><div class="who"><span class="demo">Voorbeeld · fictieve data</span><br>C.J. Kam · Eigenaar</div></aside><main>${V[view]()}</main></div>`;
  if(view==='plan')wirePlan();if(view==='opdr')upd();if(view==='uren')tolU();if(view==='chk')pv();
 }
 /* ================= TAALWISSELAAR: Nederlands, Engels, Duits, Frans, Portugees, Hindi ================= */
@@ -1002,6 +1002,7 @@ Financieel|Finance|Finanzen|Finances|Finanças|वित्त
 Offertes & facturen|Quotes & invoices|Angebote & Rechnungen|Devis & factures|Orçamentos e faturas|कोटेशन और चालान
 Factuurontwerp|Invoice design|Rechnungsdesign|Modèle de facture|Design da fatura|चालान डिज़ाइन
 Inkoop & mail|Purchasing & mail|Einkauf & Post|Achats & courrier|Compras e correio|खरीद और मेल
+Meer|More|Mehr|Plus|Mais|और
 Meer ▾|More ▾|Mehr ▾|Plus ▾|Mais ▾|और ▾
 Meer ▴|More ▴|Mehr ▴|Plus ▴|Mais ▴|और ▴
 Salaris|Payroll|Gehalt|Paie|Salários|वेतन
