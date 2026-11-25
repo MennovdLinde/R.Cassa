@@ -144,7 +144,7 @@ const marg=[['Kantoor Zuidas',4820,3290,32],['Sportschool Fit',1890,1480,22],['C
 /* ---------- views ---------- */
 const sel={klant:null,team:null,opdr:0,chk:0,loc:0,mid:'nfc',bk:'btw',inst:'feest',imp:0,sal:2};
 let moreOpen=false;
-const nav=[['Dagelijks'],['dash','🏠','Dashboard'],['plan','📅','Planning'],['bus','🚐','Bussen'],['inbox','💬','Berichten'],['taken','☑️','Taken'],['pa','🧑‍💼','Assistent'],['Relaties'],['klant','👥','Klanten'],['opdr','🔁','Opdrachten'],['kaart2','🗺️','Locaties'],['Personeel'],['team','🧑‍🤝‍🧑','Medewerkers'],['verlof','🌴','Verlof'],['Uitvoering'],['chk','📋','Checklists'],['werk','✅','Werkorders'],['uren','⏱️','Uren & marge'],['zones','🧩','Wie deed wat'],['Financieel'],['fin','💶','Offertes & facturen'],['fact','🎨','Factuurontwerp'],['inkoop','🏦','Inkoop & mail'],['Meer'],['sal','💼','Salaris','m'],['bk','📒','Boekhouding','m'],['rap','📊','Rapporten','m'],['mid','🔑','Middelen','m'],['stock','📦','Voorraad','m'],['rollen','🔐','Rollen & rechten','m'],['inst','⚙️','Instellingen','m'],['vergelijk','⚖️','Vs. Klien IT','m']];
+const nav=[['Dagelijks'],['dash','🏠','Dashboard'],['plan','📅','Planning'],['bus','🚐','Voertuigplanning'],['inbox','💬','Berichten'],['taken','☑️','Taken'],['pa','🧑‍💼','Assistent'],['Relaties'],['klant','👥','Klanten'],['opdr','🔁','Opdrachten'],['kaart2','🗺️','Locaties'],['Personeel'],['team','🧑‍🤝‍🧑','Medewerkers'],['verlof','🌴','Verlof'],['Uitvoering'],['chk','📋','Checklists'],['werk','✅','Werkorders'],['uren','⏱️','Uren & marge'],['zones','🧩','Wie deed wat'],['Financieel'],['fin','💶','Offertes & facturen'],['fact','🎨','Factuurontwerp'],['inkoop','🏦','Inkoop & mail'],['Meer'],['sal','💼','Salaris','m'],['bk','📒','Boekhouding','m'],['rap','📊','Rapporten','m'],['mid','🔑','Middelen','m'],['stock','📦','Voorraad','m'],['rollen','🔐','Rollen & rechten','m'],['inst','⚙️','Instellingen','m'],['vergelijk','⚖️','Vs. Klien IT','m']];
 const V={};
 V.dash=()=>`
 <div class="top"><div><h1>Goedemorgen, C.J. 👋</h1><div class="sub">Maandag 23 november · alles wat vandaag telt, op één scherm</div></div><button class="btn" onclick="go('plan')">Naar planning</button></div>
@@ -440,7 +440,7 @@ const CMP_HAS=[
  ['Wie deed wat in grote ruimtes','Zones met scans per medewerker, controles die terug te voeren zijn op een persoon, en meldingen terugvinden op tijd en zone.','Niet gezien'],
  ['Routeplanning voor elektrische voertuigen','Bereik op basis van temperatuur en accustand, met waarschuwing als de route niet past.','Niet gezien'],
  ['Aanvragen in het portaal met status','Klanten zien details en verloop (aangevraagd, geaccepteerd, niet geaccepteerd). Wijzigen kan zelf vanaf 14 dagen vooruit.','Geen portaal'],
- ['Bussenplanning','Vijf bussen en de Aixam: wie rijdt met wie, route per bus, wat er mee moet, welke bus mee naar huis, zitplaatsen en km-standen.','Niet gezien'],
+ ['Voertuigplanning','Vijf bussen en de Aixam: wie rijdt met wie, route per bus, wat er mee moet, welke bus mee naar huis, zitplaatsen en km-standen.','Niet gezien'],
  ['Autoplanner en AI-controleronde','Open diensten automatisch invullen op contractruimte en reistijd, en een controleronde voor managers op basis van risico.','Ontbreekt'],
  ['Facturen uit de mailbox met accordering','AI leest binnenkomende facturen, tweede accordeur boven een bedrag, waarschuwing bij dubbele of bijna verlopen facturen.','Geen mailkoppeling gezien'],
  ['Meldingen voordat het misgaat','Manager krijgt bericht bij te laat inchecken, niet uitklokken of ontbrekende foto.','Niet gezien'],
@@ -559,7 +559,7 @@ V.plan=()=>{
   grid=`<div class="pl"><div></div>${days.map((d,i)=>`<div class="h ${i==0?'today':''}">${d}</div>`).join('')}
   ${jl.map(j=>`<div class="n"><span class="chip ${jobs[j].c}" style="cursor:default;width:100%">${jobs[j].t}<small>${jobs[j].time}</small></span></div>`+days.map((d,di)=>`<div class="cell" style="cursor:default;flex-direction:row;flex-wrap:wrap;align-content:flex-start">${staff.map((s,si)=>(plan[si+'-'+di]||[]).includes(j)?`<span class="pill p-b" style="${planAs==='medewerker'&&si===0?'background:var(--blue);color:#fff':''}">${s.n.split(' ')[0]}</span>`:'').join('')}</div>`).join('')).join('')}</div>`}
  return `<div class="top"><div><h1>Planning</h1><div class="sub">Week 48 · ${planView==='med'?'sleep een dienst naar een andere dag of medewerker':planAs==='medewerker'?'Zo ziet Sanne het: alleen eigen locaties en collega\'s':'Wie werkt waar, per locatie'}</div></div>
- <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost" onclick="autoPlan()">✨ Autoplanner${openS.length?` <span class="pill p-a">${openS.length}</span>`:''}</button><button class="btn ghost" onclick="ctrlRound()">🔍 Controleronde</button><button class="btn ghost" onclick="go('bus')">🚐 Bussen</button><button class="btn" onclick="toast('Nieuwe dienst: kies klant en tijd')">+ Dienst</button></div></div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost" onclick="autoPlan()">✨ Autoplanner${openS.length?` <span class="pill p-a">${openS.length}</span>`:''}</button><button class="btn ghost" onclick="ctrlRound()">🔍 Controleronde</button><button class="btn ghost" onclick="go('bus')">🚐 Voertuigplanning</button><button class="btn" onclick="toast('Nieuwe dienst: kies klant en tijd')">+ Dienst</button></div></div>
  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center"><div class="seg"><button class="${planView==='med'?'on':''}" onclick="planView='med';render()">Per medewerker</button><button class="${planView==='loc'?'on':''}" onclick="planView='loc';render()">Wie werkt waar</button></div>
  <div class="seg"><button class="${planAs==='planner'?'on':''}" onclick="planAs='planner';render()">Planner ziet alles</button><button class="${planAs==='medewerker'?'on':''}" onclick="planAs='medewerker';planView='loc';render()">Medewerker (Sanne)</button></div></div>
  <div class="hint"><span>💡 <b>Herhalen in 1 klik:</b> dubbelklik een dienst en kies elke week, om de 2, 3 of 4 weken, maand, 6 maanden of jaarlijks.</span><span class="pill p-b">Nieuw</span></div>
@@ -939,7 +939,7 @@ const busCard=b=>{const d=BD[b.id],on=d.crew.length>0,free=busFree(),ld=LOAD.map
  :`<div style="color:var(--mute);font-size:14px;margin-bottom:10px">Deze bus staat vandaag op het magazijn. Handig voor een extra klus, of als een andere bus uitvalt.</div><select onchange="busAdd(${b.id},this.value)" style="width:auto;border-radius:99px"><option value="">+ Medewerker inplannen</option>${free.map(n=>`<option>${n}</option>`).join('')}</select>`}</div>`};
 V.bus=()=>{const used=BUS.filter(b=>BD[b.id].crew.length).length,km=BUS.reduce((a,b)=>a+busKm(b.id),0),people=BUS.reduce((a,b)=>a+BD[b.id].crew.length,0),seats=BUS.filter(b=>BD[b.id].crew.length).reduce((a,b)=>a+b.z,0),ldOk=LOAD.filter(l=>l.ok).length;
  const homes=BUS.filter(b=>BD[b.id].home),mates={};Object.keys(PERS).forEach(n=>(mates[PERS[n].a]=mates[PERS[n].a]||[]).push(n));const together=Object.keys(mates).filter(a=>mates[a].length>1&&mates[a].every(n=>n!=='Ravi Singh'));
- return `<div class="top"><div><h1>Bussenplanning</h1><div class="sub">Vijf bussen en de Aixam · maandag 23 november · wie rijdt met wie, welke route en wat moet er mee</div></div>
+ return `<div class="top"><div><h1>Voertuigplanning</h1><div class="sub">Vijf bussen en de Aixam · maandag 23 november · wie rijdt met wie, welke route en wat moet er mee</div></div>
  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn ghost" onclick="busOptim()">✨ Optimaliseer bussen${busOpt?'':' <span class="pill p-a">2</span>'}</button><button class="btn" onclick="toast('Nieuwe rit: kies klant, bus en tijd')">+ Rit</button></div></div>
  <div class="grid g4" style="margin:6px 0 16px">
   <div class="card kpi"><div class="l">Bussen ingezet</div><div class="v">${used} <small style="font-size:15px;color:var(--mute)">van ${BUS.length}</small></div><div class="d up">${BUS.length-used} bus beschikbaar</div></div>
@@ -982,7 +982,7 @@ const TR={};
 `Dagelijks|Daily|Täglich|Au quotidien|Diário|दैनिक
 Dashboard|Dashboard|Dashboard|Tableau de bord|Painel|डैशबोर्ड
 Planning|Schedule|Planung|Planning|Planeamento|योजना
-Bussen|Vans|Transporter|Camionnettes|Carrinhas|वैन
+Voertuigplanning|Vehicle planning|Fahrzeugplanung|Planification des véhicules|Planeamento de veículos|वाहन योजना
 Berichten|Messages|Nachrichten|Messages|Mensagens|संदेश
 Taken|Tasks|Aufgaben|Tâches|Tarefas|कार्य
 Assistent|Assistant|Assistent|Assistant|Assistente|सहायक
@@ -1053,14 +1053,13 @@ Bekijk details →|View details →|Details ansehen →|Voir les détails →|Ve
 Week 48 · sleep een dienst naar een andere dag of medewerker|Week 48 · drag a shift to another day or employee|Woche 48 · Schicht auf einen anderen Tag oder Mitarbeiter ziehen|Semaine 48 · faites glisser un service vers un autre jour ou employé|Semana 48 · arrasta um turno para outro dia ou colaborador|सप्ताह 48 · शिफ्ट को दूसरे दिन या कर्मचारी पर खींचें
 ✨ Autoplanner|✨ Auto-scheduler|✨ Autoplaner|✨ Planificateur auto|✨ Planeador automático|✨ ऑटो-प्लानर
 🔍 Controleronde|🔍 Inspection round|🔍 Kontrollrunde|🔍 Tournée de contrôle|🔍 Ronda de controlo|🔍 निरीक्षण राउंड
-🚐 Bussen|🚐 Vans|🚐 Transporter|🚐 Camionnettes|🚐 Carrinhas|🚐 वैन
+🚐 Voertuigplanning|🚐 Vehicle planning|🚐 Fahrzeugplanung|🚐 Planification des véhicules|🚐 Planeamento de veículos|🚐 वाहन योजना
 + Dienst|+ Shift|+ Schicht|+ Service|+ Turno|+ शिफ्ट
 Per medewerker|Per employee|Pro Mitarbeiter|Par employé|Por colaborador|कर्मचारी के अनुसार
 Wie werkt waar|Who works where|Wer arbeitet wo|Qui travaille où|Quem trabalha onde|कौन कहाँ काम करता है
 Planner ziet alles|Planner sees everything|Planer sieht alles|Le planificateur voit tout|O planeador vê tudo|प्लानर सब देखता है
 Medewerker (Sanne)|Employee (Sanne)|Mitarbeiter (Sanne)|Employé (Sanne)|Colaborador (Sanne)|कर्मचारी (Sanne)
 Open|Open|Offen|Ouvert|Em aberto|खुला
-Bussenplanning|Van planning|Transporterplanung|Planning des camionnettes|Planeamento de carrinhas|वैन योजना
 Vijf bussen en de Aixam · maandag 23 november · wie rijdt met wie, welke route en wat moet er mee|Five vans and the Aixam · Monday 23 November · who rides with whom, which route and what goes along|Fünf Transporter und der Aixam · Montag, 23. November · wer fährt mit wem, welche Route und was muss mit|Cinq camionnettes et l'Aixam · lundi 23 novembre · qui roule avec qui, quel itinéraire et ce qu'il faut emporter|Cinco carrinhas e o Aixam · segunda-feira, 23 de novembro · quem vai com quem, que percurso e o que levar|पाँच वैन और Aixam · सोमवार 23 नवंबर · कौन किसके साथ जाता है, कौन सा रास्ता और क्या ले जाना है
 ✨ Optimaliseer bussen|✨ Optimise vans|✨ Transporter optimieren|✨ Optimiser les camionnettes|✨ Otimizar carrinhas|✨ वैन अनुकूलित करें
 + Rit|+ Trip|+ Fahrt|+ Trajet|+ Viagem|+ यात्रा
